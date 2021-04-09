@@ -1,13 +1,27 @@
 import React from "react";
 import styled from "styled-components/native";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import { SafeArea } from "../components/SafeAreaView";
 import { Spacer } from "../components/Spacer";
+
+const ContentContainer = styled(ScrollView)`
+  padding-top: 50px;
+`;
 
 const Container = styled(View)`
   flex: 1;
   justify-content: center;
-  background-color: whitesmoke;
+`;
+
+const HeaderContainer = styled(View)`
+  margin-bottom: 18px;
 `;
 
 const HeaderText = styled(Text)`
@@ -34,6 +48,8 @@ const Button = styled(TouchableOpacity)`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
+  margin-top: 12px
+  margin-bottom: 12px;
 `;
 
 const ButtonText = styled(Text)`
@@ -42,20 +58,57 @@ const ButtonText = styled(Text)`
   color: #fff;
 `;
 
+const NavContainer = styled(View)`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const NavText = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold}
+  color: #24253d
+`;
+
+const NavLink = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold}
+  color: #24253d
+  text-decoration: underline
+`;
+
 export const SigninScreen = ({ navigation }) => {
   return (
-    <SafeArea>
-      <Container>
-        <Spacer>
-          <HeaderText>Hello Again!</HeaderText>
-          <HeaderText>Welcome back</HeaderText>
-          <Input placeholder="Email" />
-          <Input placeholder="Password" />
-          <Button>
-            <ButtonText>Sign In</ButtonText>
-          </Button>
-        </Spacer>
-      </Container>
-    </SafeArea>
+    <KeyboardAvoidingView>
+      <ContentContainer>
+        <SafeArea>
+          <Container>
+            <Spacer>
+              <HeaderContainer>
+                <HeaderText>Hello Again!</HeaderText>
+                <HeaderText>Welcome back</HeaderText>
+              </HeaderContainer>
+              <Input placeholder="Email" />
+              <Input placeholder="Password" />
+              <Button>
+                <ButtonText>Sign In</ButtonText>
+              </Button>
+
+              <NavContainer>
+                <NavText>Forgot Your Password ?</NavText>
+                <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+                  <NavLink>Sign up</NavLink>
+                </TouchableOpacity>
+              </NavContainer>
+
+              <NavContainer>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Dashboard")}
+                >
+                  <NavLink>To dashboard</NavLink>
+                </TouchableOpacity>
+              </NavContainer>
+            </Spacer>
+          </Container>
+        </SafeArea>
+      </ContentContainer>
+    </KeyboardAvoidingView>
   );
 };
