@@ -81,7 +81,6 @@ const MainBanner = styled(View)`
 
 const BannerSection = styled(View)`
   width: 50%;
-  height: 190px;
   padding: 20px;
   margin-right: 20px;
 `;
@@ -192,7 +191,7 @@ const CompetitionButton = styled(TouchableOpacity)`
   align-items: center
 `;
 
-export const DashboardScreen = ({ navigation }) => {
+export const UserProfileScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Container>
@@ -202,9 +201,7 @@ export const DashboardScreen = ({ navigation }) => {
             <Name>Finsen Antonius</Name>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <ProfilePicture source={require("../../assets/giraffe.png")} />
-          </TouchableOpacity>
+          <ProfilePicture source={require("../../assets/giraffe.png")} />
         </ProfileContainer>
 
         <Spacer>

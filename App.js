@@ -22,6 +22,7 @@ import { theme } from "./src/theme";
 import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
 import { DashboardScreen } from "./src/screens/DashboardScreen";
+import { UserProfileScreen } from "./src/screens/UserProfileScreen";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const AuthStack = () => (
     <Stack.Screen name="Signin" component={SigninScreen} />
     <Stack.Screen name="Signup" component={SignupScreen} />
     <Stack.Screen name="Dashboard" component={DashboardScreen} />
+    <Stack.Screen name="Profile" component={UserProfileScreen} />
   </Stack.Navigator>
 );
 
