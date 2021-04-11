@@ -136,7 +136,7 @@ export const UserProfileScreen = ({ navigation }) => {
                 <Name>Finsen Antonius</Name>
                 <MaterialIcons name="verified" style={styles.verified} />
               </View>
-              <Bio>Suka ngoding tapi cupu</Bio>
+              <Bio>Suka ngoding</Bio>
 
               <EditButton>
                 <ButtonText>Edit Profile</ButtonText>
