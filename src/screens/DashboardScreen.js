@@ -72,7 +72,6 @@ const SearchBar = styled(TextInput)`
 `;
 
 const MainBanner = styled(View)`
-  height: 190px;
   background-color: #0e4a86;
   border-radius: 10px;
   flex-direction: row;

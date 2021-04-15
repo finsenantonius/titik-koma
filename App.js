@@ -23,6 +23,9 @@ import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
 import { DashboardScreen } from "./src/screens/DashboardScreen";
 import { UserProfileScreen } from "./src/screens/UserProfileScreen";
+import { VoucherScreen } from "./src/screens/VoucherScreen";
+import { RewardScreen } from "./src/screens/RewardScreen";
+import { ChangePasswordScreen } from "./src/screens/ChangePasswordScreen";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +35,9 @@ const AuthStack = () => (
     <Stack.Screen name="Signup" component={SignupScreen} />
     <Stack.Screen name="Dashboard" component={DashboardScreen} />
     <Stack.Screen name="Profile" component={UserProfileScreen} />
+    <Stack.Screen name="Voucher" component={VoucherScreen} />
+    <Stack.Screen name="Reward" component={RewardScreen} />
+    <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
   </Stack.Navigator>
 );
 

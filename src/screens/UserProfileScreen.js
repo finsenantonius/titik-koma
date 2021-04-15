@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import {
   View,
   Text,
+  Button,
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -11,8 +12,11 @@ import {
   StatusBar,
   Image,
   StyleSheet,
+  Linking,
 } from "react-native";
-import { Spacer } from "../components/Spacer";
+import { LogoutModal } from "../components/Modal";
+import { Menu } from "../components/Menu";
+import { Header } from "../components/Header";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const SafeArea = styled(SafeAreaView)`
@@ -23,13 +27,6 @@ export const SafeArea = styled(SafeAreaView)`
 
 const Container = styled(View)`
   flex: 1;
-  background-color: whitesmoke;
-`;
-
-const HeaderContainer = styled(View)`
-  height: 50px;
-  padding: 16px;
-  flex-direction: row;
   background-color: whitesmoke;
 `;
 
@@ -96,39 +93,29 @@ const MenuSection = styled(View)`
   margin-bottom: 16px
 `;
 
-const Menu = styled(TouchableOpacity)`
-  padding: 16px;
-  height: 60px;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const Wrapper = styled(View)`
-  flex-direction: row;
-`;
-
-const MenuText = styled(Text)`
-  font-size: 16px
-  font-family: ${(props) => props.theme.fonts.body};
-  color: black;
-  align-self: center
-`;
-
 const Border = styled(View)`
   border-bottom-color: whitesmoke;
-  border-width: 0.3px;
+  border-width: 0.5px;
 `;
 
+const openPlayStore = () => {
+  const GOOGLE_PACKAGE_NAME = "com.whatsapp";
+  Linking.openURL(`market://details?id=${GOOGLE_PACKAGE_NAME}`);
+};
+
 export const UserProfileScreen = ({ navigation }) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  console.log(navigation);
   return (
     <SafeArea>
+      <Header navigate={() => navigation.goBack()} title="Profile" />
       <ScrollView>
         <Container>
-          <HeaderContainer>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <MaterialIcons name="arrow-back" style={styles.icon} />
-            </TouchableOpacity>
-          </HeaderContainer>
           <ProfileContainer>
             <ProfilePicture source={require("../../assets/giraffe.png")} />
             <View>
@@ -146,75 +133,44 @@ export const UserProfileScreen = ({ navigation }) => {
           <MenuContainer>
             <MenuTitleText>Akun</MenuTitleText>
             <MenuSection>
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="local-offer" style={styles.icon} />
-                  <MenuText>Kode Voucher</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu
+                iconName="local-offer"
+                title="Kode Voucher"
+                navigate={() => navigation.navigate("Voucher")}
+              />
               <Border />
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="redeem" style={styles.icon} />
-                  <MenuText>Reward Saya</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu
+                iconName="redeem"
+                title="Reward Saya"
+                navigate={() => navigation.navigate("Reward")}
+              />
               <Border />
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="people-alt" style={styles.icon} />
-                  <MenuText>Undang Teman</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu iconName="people-alt" title="Undang Teman" />
             </MenuSection>
 
             <MenuTitleText>Pusat Bantuan</MenuTitleText>
             <MenuSection>
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="help-outline" style={styles.icon} />
-                  <MenuText>Bantuan</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu iconName="help-outline" title="Bantuan" />
               <Border />
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="feedback" style={styles.icon} />
-                  <MenuText>Feedback</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu iconName="feedback" title="Feedback" />
               <Border />
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="star-border" style={styles.icon} />
-                  <MenuText>Nilai Kami</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu
+                iconName="star-border"
+                title="Nilai Kami"
+                navigate={openPlayStore}
+              />
             </MenuSection>
 
             <MenuTitleText>Pengaturan</MenuTitleText>
             <MenuSection style={{ height: 120 }}>
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="lock" style={styles.icon} />
-                  <MenuText>Ubah Password</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu
+                iconName="lock"
+                title="Ubah Password"
+                navigate={() => navigation.navigate("ChangePassword")}
+              />
               <Border />
-              <Menu>
-                <Wrapper>
-                  <MaterialIcons name="logout" style={styles.icon} />
-                  <MenuText>Keluar</MenuText>
-                </Wrapper>
-                <MaterialIcons name="chevron-right" style={styles.arrow} />
-              </Menu>
+              <Menu iconName="logout" title="Keluar" navigate={toggleModal} />
+              <LogoutModal visible={isModalVisible} closeModal={toggleModal} />
             </MenuSection>
           </MenuContainer>
         </Container>
