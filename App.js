@@ -26,6 +26,7 @@ import { UserProfileScreen } from "./src/screens/UserProfileScreen";
 import { VoucherScreen } from "./src/screens/VoucherScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
 import { ChangePasswordScreen } from "./src/screens/ChangePasswordScreen";
+import { EditProfileScreen } from "./src/screens/EditProfile";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ const AuthStack = () => (
     <Stack.Screen name="Voucher" component={VoucherScreen} />
     <Stack.Screen name="Reward" component={RewardScreen} />
     <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
+    <Stack.Screen name="EditProfile" component={EditProfileScreen} />
   </Stack.Navigator>
 );
 

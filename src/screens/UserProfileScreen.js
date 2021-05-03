@@ -125,7 +125,7 @@ export const UserProfileScreen = ({ navigation }) => {
               </View>
               <Bio>Suka ngoding</Bio>
 
-              <EditButton>
+              <EditButton onPress={() => navigation.navigate("EditProfile")}>
                 <ButtonText>Edit Profile</ButtonText>
               </EditButton>
             </View>
