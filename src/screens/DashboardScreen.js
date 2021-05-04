@@ -215,7 +215,7 @@ export const DashboardScreen = ({ navigation }) => {
           <MainBanner>
             <BannerSection>
               <BannerText>What do you want to learn today ?</BannerText>
-              <Button>
+              <Button onPress={() => navigation.navigate("CourseList")}>
                 <ButtonText>Get Started</ButtonText>
               </Button>
             </BannerSection>
