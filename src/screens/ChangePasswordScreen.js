@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components/native";
 import {
   View,
@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { Header } from "../components/Header";
+import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -45,6 +46,7 @@ const Input = styled(TextInput)`
   padding: 16px;
   font-size: 16px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  font-weight: normal;
 `;
 
 const Button = styled(TouchableOpacity)`
@@ -65,20 +67,63 @@ const ButtonText = styled(Text)`
 `;
 
 export const ChangePasswordScreen = ({ navigation }) => {
+  const { changePassword, alertPassword, resetAlert, onError } =
+    useContext(UserContext);
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+
+  useEffect(() => {
+    resetAlert();
+  }, []);
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Ubah Password" />
       <Container>
         <HeaderText>Ubah kata sandi anda.</HeaderText>
         <Label>Password Lama</Label>
-        <Input placeholder="Masukkan password anda" />
+        <Input
+          placeholder="Masukkan password anda"
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          label="Password"
+          value={password}
+          onChangeText={setPassword}
+        />
         <Label>Password Baru</Label>
-        <Input placeholder="Masukkan password baru" />
+        <Input
+          placeholder="Masukkan password baru"
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          label="Password"
+          value={newPassword}
+          onChangeText={setNewPassword}
+        />
         <Label>Konfirmasi Password Baru</Label>
-        <Input placeholder="Konfirmasi password baru" />
-        <Button>
+        <Input
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          label="Password"
+          value={confPassword}
+          onChangeText={setConfPassword}
+          style={{
+            borderWidth: onError ? 2 : 0,
+            borderColor: onError ? "red" : null,
+          }}
+        />
+        <Button
+          onPress={() =>
+            changePassword({ password, newPassword, confPassword })
+          }
+        >
           <ButtonText>Ubah Password</ButtonText>
         </Button>
+        <Label>{alertPassword}</Label>
       </Container>
     </SafeArea>
   );

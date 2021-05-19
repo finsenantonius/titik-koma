@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components/native";
 import {
   View,
@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { Header } from "../components/Header";
+import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -45,6 +46,7 @@ const Input = styled(TextInput)`
   padding: 16px;
   font-size: 16px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  font-weight: normal;
 `;
 
 const Button = styled(TouchableOpacity)`
@@ -65,16 +67,34 @@ const ButtonText = styled(Text)`
 `;
 
 export const EditProfileScreen = ({ navigation }) => {
+  const { name, updateProfile, getCredential } = useContext(UserContext);
+  const [inputName, setInputName] = useState(name);
+
+  useEffect(() => {
+    getCredential();
+  }, []);
+
+  const navigate = () => {
+    navigation.navigate("Profile");
+  };
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Edit Profil" />
       <Container>
         <HeaderText>Ubah data diri Anda.</HeaderText>
         <Label>Nama</Label>
-        <Input placeholder="Masukkan nama" value="Finsen Antonius" />
+        <Input
+          autoCapitalize="none"
+          autoCorrect={false}
+          label="Name"
+          placeholder="Masukkan nama"
+          value={inputName}
+          onChangeText={setInputName}
+        />
         <Label>Bio</Label>
         <Input placeholder="Masukkan biodata" value="suka ngoding" />
-        <Button>
+        <Button onPress={() => updateProfile({ inputName, navigate })}>
           <ButtonText>Update Profil</ButtonText>
         </Button>
       </Container>

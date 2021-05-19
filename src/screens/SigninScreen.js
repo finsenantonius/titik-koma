@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import styled from "styled-components/native";
 import {
   View,
@@ -39,6 +40,7 @@ const Input = styled(TextInput)`
   padding: 16px;
   font-size: 16px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  font-weight: normal;
 `;
 
 const Button = styled(TouchableOpacity)`
@@ -74,7 +76,23 @@ const NavLink = styled(Text)`
   text-decoration: underline
 `;
 
+const AlertText = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold}
+  color: red
+`;
+
 export const SigninScreen = ({ navigation }) => {
+  const { signIn, alert, clearAlert } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      clearAlert();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <KeyboardAvoidingView>
       <ContentContainer>
@@ -85,9 +103,25 @@ export const SigninScreen = ({ navigation }) => {
                 <HeaderText>Hello Again!</HeaderText>
                 <HeaderText>Welcome back</HeaderText>
               </HeaderContainer>
-              <Input placeholder="Email" />
-              <Input placeholder="Password" />
-              <Button>
+              <Input
+                autoCapitalize="none"
+                autoCorrect={false}
+                label="Email"
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+              />
+              <Input
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                placeholder="Password"
+                label="Password"
+                value={password}
+                onChangeText={setPassword}
+              />
+              {alert ? <AlertText>{alert}</AlertText> : null}
+              <Button onPress={() => signIn({ email, password })}>
                 <ButtonText>Sign In</ButtonText>
               </Button>
 

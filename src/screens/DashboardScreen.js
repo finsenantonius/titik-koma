@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components/native";
 import {
   View,
@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Spacer } from "../components/Spacer";
 import { Feather } from "@expo/vector-icons";
+import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -192,13 +193,17 @@ const CompetitionButton = styled(TouchableOpacity)`
 `;
 
 export const DashboardScreen = ({ navigation }) => {
+  const { name } = useContext(UserContext);
+
+  useEffect(() => {}, []);
+
   return (
     <SafeArea>
       <Container>
         <ProfileContainer>
           <View style={{ justifyContent: "center" }}>
             <HeadingText>Welcome Back,</HeadingText>
-            <Name>Finsen Antonius</Name>
+            <Name>{name}</Name>
           </View>
 
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
@@ -222,7 +227,7 @@ export const DashboardScreen = ({ navigation }) => {
             <BannerImage source={require("../../assets/character.png")} />
           </MainBanner>
 
-          <CourseHeader>Course</CourseHeader>
+          <CourseHeader>Popular Course</CourseHeader>
           <View
             style={{
               flexDirection: "row",
@@ -248,7 +253,9 @@ export const DashboardScreen = ({ navigation }) => {
             <View style={{ padding: 16 }}>
               <CompetitionText>10-days challenge</CompetitionText>
               <CompetitionText2>Beginner Level</CompetitionText2>
-              <CompetitionButton>
+              <CompetitionButton
+                onPress={() => navigation.navigate("CompetitionList")}
+              >
                 <ButtonText>Join Now</ButtonText>
               </CompetitionButton>
             </View>

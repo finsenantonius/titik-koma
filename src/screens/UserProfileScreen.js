@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components/native";
 import {
   View,
@@ -18,6 +18,7 @@ import { LogoutModal } from "../components/Modal";
 import { Menu } from "../components/Menu";
 import { Header } from "../components/Header";
 import { MaterialIcons } from "@expo/vector-icons";
+import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -104,13 +105,17 @@ const openPlayStore = () => {
 };
 
 export const UserProfileScreen = ({ navigation }) => {
+  const { name, getUser } = useContext(UserContext);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  console.log(navigation);
+  useEffect(() => {
+    navigation.addListener("focus", () => getUser());
+  }, []);
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Profile" />
@@ -120,7 +125,7 @@ export const UserProfileScreen = ({ navigation }) => {
             <ProfilePicture source={require("../../assets/giraffe.png")} />
             <View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Name>Finsen Antonius</Name>
+                <Name>{name}</Name>
                 <MaterialIcons name="verified" style={styles.verified} />
               </View>
               <Bio>Suka ngoding</Bio>

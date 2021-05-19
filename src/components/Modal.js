@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { View, Text, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 import styled from "styled-components/native";
@@ -63,6 +64,7 @@ const CancelButtonText = styled(Text)`
 `;
 
 export const LogoutModal = ({ visible, closeModal }) => {
+  const { removeToken } = useContext(AuthContext);
   return (
     <Modal isVisible={visible} animationIn="fadeIn" animationOut="fadeOut">
       <Container>
@@ -72,7 +74,7 @@ export const LogoutModal = ({ visible, closeModal }) => {
           <CancelButton onPress={closeModal}>
             <CancelButtonText>Batal</CancelButtonText>
           </CancelButton>
-          <SubmitButton>
+          <SubmitButton onPress={removeToken}>
             <SubmitButtonText>Keluar</SubmitButtonText>
           </SubmitButton>
         </ButtonContainer>
