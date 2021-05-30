@@ -193,9 +193,11 @@ const CompetitionButton = styled(TouchableOpacity)`
 `;
 
 export const DashboardScreen = ({ navigation }) => {
-  const { name } = useContext(UserContext);
+  const { name, getUser } = useContext(UserContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <SafeArea>

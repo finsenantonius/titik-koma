@@ -33,6 +33,12 @@ import { CourseListScreen } from "./src/screens/CourseList";
 import { CompetitionListScreen } from "./src/screens/CompetitionList";
 import { SplashScreen } from "./src/screens/SplashScreen";
 
+import { Challenge1 } from "./src/screens/challenges/Challenge1";
+import { Challenge2 } from "./src/screens/challenges/Challenge2";
+import { Challenge3 } from "./src/screens/challenges/Challenge3";
+import { Challenge4 } from "./src/screens/challenges/Challenge4";
+import { Challenge5 } from "./src/screens/challenges/Challenge5";
+
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
@@ -63,6 +69,11 @@ const AuthStack = () => {
             name="CompetitionList"
             component={CompetitionListScreen}
           />
+          <Stack.Screen name="Challenge1" component={Challenge1} />
+          <Stack.Screen name="Challenge2" component={Challenge2} />
+          <Stack.Screen name="Challenge3" component={Challenge3} />
+          <Stack.Screen name="Challenge4" component={Challenge4} />
+          <Stack.Screen name="Challenge5" component={Challenge5} />
         </>
       ) : (
         <>

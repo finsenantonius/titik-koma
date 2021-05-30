@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import URL from "../../api/url";
 import axios from "axios";
 
 export const UserContext = createContext();
@@ -7,6 +8,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
+  const [score, setScore] = useState("");
   const [credential, setCredential] = useState("");
   const [alertPassword, setAlertPassword] = useState("");
   const [onError, setOnError] = useState(false);
@@ -16,7 +18,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const getUser = async () => {
-    const url = "http://23d5e12c3fa7.ngrok.io/api/user/getDetailData";
+    const url = URL + "/api/user/getDetailData";
     try {
       const token = await AsyncStorage.getItem("@token");
       if (token !== null) {
@@ -25,6 +27,8 @@ export const UserProvider = ({ children }) => {
           .then((res) => {
             setId(res.data._id);
             setName(res.data.name);
+            setScore(res.data.score);
+            console.log(res.data.score);
           })
           .catch((err) => console.log("gagal user"));
       }
@@ -39,7 +43,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const signIn = ({ navigate }) => {
-    const url = "http://23d5e12c3fa7.ngrok.io/api/user/login";
+    const url = URL + "/api/user/login";
     axios
       .post(url, credential)
       .then((response) => {
@@ -56,7 +60,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const updateProfile = ({ inputName, navigate }) => {
-    const url = "http://23d5e12c3fa7.ngrok.io/api/user/updateProfile";
+    const url = URL + "/api/user/updateProfile";
     axios
       .patch(url, { id: id, name: inputName })
       .then((res) => {
@@ -69,7 +73,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const changePassword = ({ password, newPassword, confPassword }) => {
-    const url = "http://23d5e12c3fa7.ngrok.io/api/user/changePassword";
+    const url = URL + "/api/user/changePassword";
     if (newPassword === confPassword) {
       const data = {
         id: id,
@@ -98,6 +102,19 @@ export const UserProvider = ({ children }) => {
     setOnError(false);
   };
 
+  const updateScore = ({ score, navigate }) => {
+    const url = URL + "/api/user/updateScore";
+    console.log("Api", score);
+    axios
+      .patch(url, { id: id, score: score })
+      .then((res) => {
+        navigate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -109,6 +126,7 @@ export const UserProvider = ({ children }) => {
         getUser,
         changePassword,
         resetAlert,
+        updateScore,
       }}
     >
       {children}

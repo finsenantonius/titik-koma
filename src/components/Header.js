@@ -36,6 +36,12 @@ const Title = styled(Text)`
   margin-right: 34px
 `;
 
+const ChallengeTitle = styled(Text)`
+  font-size: 18px
+  font-family: ${(props) => props.theme.fonts.body};
+  color: black;
+`;
+
 export const Header = ({ navigate, title }) => {
   return (
     <Container>
@@ -45,6 +51,18 @@ export const Header = ({ navigate, title }) => {
         </TouchableOpacity>
         <TitleContainer>
           <Title>{title}</Title>
+        </TitleContainer>
+      </HeaderContainer>
+    </Container>
+  );
+};
+
+export const ChallengeHeader = ({ title }) => {
+  return (
+    <Container>
+      <HeaderContainer>
+        <TitleContainer>
+          <ChallengeTitle>{title}</ChallengeTitle>
         </TitleContainer>
       </HeaderContainer>
     </Container>

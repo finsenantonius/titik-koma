@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import URL from "../../api/url";
 import axios from "axios";
 
 export const AuthContext = createContext();
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signIn = ({ email, password }) => {
-    const url = "http://23d5e12c3fa7.ngrok.io/api/user/login";
+    const url = URL + "/api/user/login";
     const credential = { email, password };
     axios
       .post(url, credential)
@@ -51,9 +52,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signUp = ({ name, email, password }) => {
-    const url = "http://23d5e12c3fa7.ngrok.io/api/user/register";
+    const url = URL + "/api/user/register";
+    const score = 0;
     axios
-      .post(url, { name, email, password })
+      .post(url, { name, email, password, score })
       .then((response) => {
         console.log(response.data);
         setAlertSuccess(

@@ -14,8 +14,7 @@ import {
   StyleSheet,
   Linking,
 } from "react-native";
-import { LogoutModal } from "../components/Modal";
-import { Menu } from "../components/Menu";
+import { ChallengeCard } from "../components/ChallengeCard";
 import { Header } from "../components/Header";
 import { FontAwesome5 } from "@expo/vector-icons";
 
@@ -146,7 +145,7 @@ export const CompetitionListScreen = ({ navigation }) => {
 
         <MenuContainer>
           <MenuTitleText>Competition</MenuTitleText>
-          <MenuSection></MenuSection>
+          <ChallengeCard navigate={() => navigation.navigate("Challenge1")} />
         </MenuContainer>
       </Container>
     </SafeArea>
