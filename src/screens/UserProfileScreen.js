@@ -131,7 +131,7 @@ export const UserProfileScreen = ({ navigation }) => {
                 <Name>{name}</Name>
                 <MaterialIcons name="verified" style={styles.verified} />
               </View>
-              <Bio>Suka ngoding</Bio>
+              {/* <Bio>Suka ngoding</Bio> */}
 
               <EditButton onPress={() => navigation.navigate("EditProfile")}>
                 <ButtonText>Edit Profile</ButtonText>

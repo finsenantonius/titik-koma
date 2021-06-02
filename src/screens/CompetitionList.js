@@ -11,6 +11,10 @@ import {
 } from "react-native";
 import { ChallengeCard } from "../components/ChallengeCard";
 import { Header } from "../components/Header";
+import {
+  SkeletonLeaderboard,
+  SkeletonImageLeaderboard,
+} from "../components/Skeleton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { UserContext } from "../context/UserContext";
 
@@ -108,9 +112,9 @@ const openPlayStore = () => {
 };
 
 export const CompetitionListScreen = ({ navigation }) => {
-  const { leaderboard, getLeaderboard } = useContext(UserContext);
+  const { leaderboard, loadLeaderboard, getLeaderboard } =
+    useContext(UserContext);
   const [isModalVisible, setModalVisible] = useState(false);
-  console.log(leaderboard[0]);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -120,6 +124,52 @@ export const CompetitionListScreen = ({ navigation }) => {
     getLeaderboard();
   }, []);
 
+  const getAvatarImage = (avatar) => {
+    if (avatar === 1) {
+      return require("../../assets/ava1.jpg");
+    } else if (avatar === 2) {
+      return require("../../assets/ava2.jpg");
+    } else if (avatar === 3) {
+      return require("../../assets/ava3.jpg");
+    } else {
+      return require("../../assets/ava4.jpg");
+    }
+  };
+
+  const loadUser = (rank, isLeader) => {
+    return (
+      <>
+        <SkeletonImageLeaderboard load={loadLeaderboard}>
+          {isLeader ? (
+            <ProfilePictureBig
+              source={
+                loadLeaderboard
+                  ? "loading"
+                  : getAvatarImage(leaderboard[rank].avatar)
+              }
+            />
+          ) : (
+            <ProfilePicture
+              source={
+                loadLeaderboard
+                  ? "loading"
+                  : getAvatarImage(leaderboard[rank].avatar)
+              }
+            />
+          )}
+        </SkeletonImageLeaderboard>
+        <SkeletonLeaderboard load={loadLeaderboard}>
+          <Name>
+            {loadLeaderboard ? "loading" : leaderboard[rank].name.split(" ")[0]}
+          </Name>
+        </SkeletonLeaderboard>
+        <SkeletonLeaderboard load={loadLeaderboard}>
+          <Name>{loadLeaderboard ? "loading" : leaderboard[rank].score}</Name>
+        </SkeletonLeaderboard>
+      </>
+    );
+  };
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Competition" />
@@ -127,23 +177,17 @@ export const CompetitionListScreen = ({ navigation }) => {
         <LeaderboardContainer>
           <ProfileContainer>
             <Rank>2</Rank>
-            <ProfilePicture source={require("../../assets/giraffe.png")} />
-            <Name>{leaderboard[1].name}</Name>
-            <Name>{leaderboard[1].score}</Name>
+            {loadUser(1, false)}
           </ProfileContainer>
 
           <ProfileContainer>
             <Icon name="crown" />
-            <ProfilePictureBig source={require("../../assets/giraffe.png")} />
-            <Name>{leaderboard[0].name}</Name>
-            <Name>{leaderboard[0].score}</Name>
+            {loadUser(0, true)}
           </ProfileContainer>
 
           <ProfileContainer>
             <Rank>3</Rank>
-            <ProfilePicture source={require("../../assets/giraffe.png")} />
-            <Name>{leaderboard[2].name}</Name>
-            <Name>{leaderboard[2].score}</Name>
+            {loadUser(2, false)}
           </ProfileContainer>
         </LeaderboardContainer>
 

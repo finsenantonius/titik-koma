@@ -13,7 +13,8 @@ export const UserProvider = ({ children }) => {
   const [credential, setCredential] = useState("");
   const [alertPassword, setAlertPassword] = useState("");
   const [onError, setOnError] = useState(false);
-  const [leaderboard, setLeaderboard] = useState([]);
+  const [leaderboard, setLeaderboard] = useState("");
+  const [loadLeaderboard, setLoadLeaderboard] = useState(true);
 
   useEffect(() => {
     getUser();
@@ -148,6 +149,7 @@ export const UserProvider = ({ children }) => {
       .get(url)
       .then((res) => {
         setLeaderboard(res.data);
+        setLoadLeaderboard(false);
       })
       .catch((err) => {
         console.log(err);
@@ -162,6 +164,7 @@ export const UserProvider = ({ children }) => {
         onError,
         leaderboard,
         avatar,
+        loadLeaderboard,
         updateProfile,
         getCredential,
         getUser,

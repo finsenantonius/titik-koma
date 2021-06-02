@@ -92,8 +92,8 @@ export const EditProfileScreen = ({ navigation }) => {
           value={inputName}
           onChangeText={setInputName}
         />
-        <Label>Bio</Label>
-        <Input placeholder="Masukkan biodata" value="suka ngoding" />
+        {/* <Label>Bio</Label>
+        <Input placeholder="Masukkan biodata" value="suka ngoding" /> */}
         <Button onPress={() => updateProfile({ inputName, navigate })}>
           <ButtonText>Update Profil</ButtonText>
         </Button>
