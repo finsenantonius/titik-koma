@@ -31,6 +31,7 @@ import { ChangePasswordScreen } from "./src/screens/ChangePasswordScreen";
 import { EditProfileScreen } from "./src/screens/EditProfile";
 import { CourseListScreen } from "./src/screens/CourseList";
 import { CompetitionListScreen } from "./src/screens/CompetitionList";
+import { ChangePhotoScreen } from "./src/screens/ChangePhotoScreen";
 import { SplashScreen } from "./src/screens/SplashScreen";
 
 import { Challenge1 } from "./src/screens/challenges/Challenge1";
@@ -64,6 +65,7 @@ const AuthStack = () => {
             component={ChangePasswordScreen}
           />
           <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+          <Stack.Screen name="ChangePhoto" component={ChangePhotoScreen} />
           <Stack.Screen name="CourseList" component={CourseListScreen} />
           <Stack.Screen
             name="CompetitionList"

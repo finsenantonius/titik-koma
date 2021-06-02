@@ -28,36 +28,8 @@ const course = [
     description: "belajar dasar javascript",
   },
   {
-    name: "C++",
-    description: "belajar dasar c++",
-  },
-  {
-    name: "Java",
-    description: "belajar dasar java",
-  },
-  {
-    name: "HTML",
-    description: "belajar dasar html",
-  },
-  {
-    name: "CSS",
-    description: "belajar dasar css",
-  },
-  {
     name: "React",
     description: "belajar dasar react",
-  },
-  {
-    name: "Test data",
-    description: "test scroll",
-  },
-  {
-    name: "Test data1",
-    description: "test scroll",
-  },
-  {
-    name: "Test data2",
-    description: "test scroll",
   },
 ];
 

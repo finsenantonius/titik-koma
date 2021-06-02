@@ -54,8 +54,9 @@ export const AuthProvider = ({ children }) => {
   const signUp = ({ name, email, password }) => {
     const url = URL + "/api/user/register";
     const score = 0;
+    const avatar = 1;
     axios
-      .post(url, { name, email, password, score })
+      .post(url, { name, email, password, score, avatar })
       .then((response) => {
         console.log(response.data);
         setAlertSuccess(

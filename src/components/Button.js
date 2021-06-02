@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, Image } from "react-native";
 
 const Button = styled(TouchableOpacity)`
   height: 60px;
@@ -44,6 +44,14 @@ const OptionText = styled(Text)`
   font-size: 16px;
 `;
 
+const ImageCard = styled(Image)`
+  width: 75px;
+  height: 75px;
+  border-radius: 15px;
+  margin-right: 12px;
+  border-width: 3px;
+`;
+
 export const BtnPrimary = ({ title }) => {
   return (
     <Button>
@@ -74,5 +82,16 @@ export const Options = ({ text, isSelected, select }) => {
         {text}
       </OptionText>
     </Option>
+  );
+};
+
+export const OptionImage = ({ image, isSelected, select }) => {
+  return (
+    <TouchableOpacity onPress={select}>
+      <ImageCard
+        source={image}
+        style={{ borderColor: isSelected ? "#0e4a86" : null }}
+      />
+    </TouchableOpacity>
   );
 };

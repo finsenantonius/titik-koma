@@ -33,13 +33,6 @@ const DescriptionText = styled(Text)`
   color: #305f72;
 `;
 
-const Icon = styled(MaterialIcons)`
-  color: black;
-  font-size: 22px;
-  margin-right: 12px;
-  align-self: center;
-`;
-
 const Arrow = styled(MaterialIcons)`
   color: black;
   font-size: 22px;

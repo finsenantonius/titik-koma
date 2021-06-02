@@ -9,9 +9,11 @@ export const UserProvider = ({ children }) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [score, setScore] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [credential, setCredential] = useState("");
   const [alertPassword, setAlertPassword] = useState("");
   const [onError, setOnError] = useState(false);
+  const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
     getUser();
@@ -28,12 +30,25 @@ export const UserProvider = ({ children }) => {
             setId(res.data._id);
             setName(res.data.name);
             setScore(res.data.score);
+            getAvatarImage(res.data.avatar);
             console.log(res.data.score);
           })
           .catch((err) => console.log("gagal user"));
       }
     } catch (e) {
       console.log("kamu ketauan");
+    }
+  };
+
+  const getAvatarImage = (avatar) => {
+    if (avatar === 1) {
+      setAvatar(require("../../assets/ava1.jpg"));
+    } else if (avatar === 2) {
+      setAvatar(require("../../assets/ava2.jpg"));
+    } else if (avatar === 3) {
+      setAvatar(require("../../assets/ava3.jpg"));
+    } else {
+      setAvatar(require("../../assets/ava4.jpg"));
     }
   };
 
@@ -115,18 +130,46 @@ export const UserProvider = ({ children }) => {
       });
   };
 
+  const updateAvatar = ({ avatar, navigate }) => {
+    const url = URL + "/api/user/updateAvatar";
+    axios
+      .patch(url, { id: id, avatar: avatar })
+      .then((res) => {
+        signIn({ navigate });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getLeaderboard = () => {
+    const url = URL + "/api/user/getAllProfile";
+    axios
+      .get(url)
+      .then((res) => {
+        setLeaderboard(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
         name,
         alertPassword,
         onError,
+        leaderboard,
+        avatar,
         updateProfile,
         getCredential,
         getUser,
         changePassword,
         resetAlert,
         updateScore,
+        getLeaderboard,
+        updateAvatar,
       }}
     >
       {children}

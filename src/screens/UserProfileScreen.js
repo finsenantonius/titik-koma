@@ -105,9 +105,8 @@ const openPlayStore = () => {
 };
 
 export const UserProfileScreen = ({ navigation }) => {
-  const { name, getUser } = useContext(UserContext);
+  const { name, avatar, getUser } = useContext(UserContext);
   const [isModalVisible, setModalVisible] = useState(false);
-
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -122,7 +121,11 @@ export const UserProfileScreen = ({ navigation }) => {
       <ScrollView>
         <Container>
           <ProfileContainer>
-            <ProfilePicture source={require("../../assets/giraffe.png")} />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ChangePhoto")}
+            >
+              <ProfilePicture source={avatar} />
+            </TouchableOpacity>
             <View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Name>{name}</Name>

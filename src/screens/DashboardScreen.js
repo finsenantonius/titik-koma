@@ -81,7 +81,7 @@ const MainBanner = styled(View)`
 
 const BannerSection = styled(View)`
   width: 50%;
-  height: 190px;
+  height: 100%;
   padding: 20px;
   margin-right: 20px;
 `;
@@ -109,8 +109,8 @@ const ButtonText = styled(Text)`
 `;
 
 const BannerImage = styled(Image)`
-  height: 190px;
-  width: 135px;
+  height: 100%;
+  width: 150px;
 `;
 
 const CourseHeader = styled(Text)`
@@ -193,7 +193,7 @@ const CompetitionButton = styled(TouchableOpacity)`
 `;
 
 export const DashboardScreen = ({ navigation }) => {
-  const { name, getUser } = useContext(UserContext);
+  const { name, avatar, getUser } = useContext(UserContext);
 
   useEffect(() => {
     getUser();
@@ -202,67 +202,71 @@ export const DashboardScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Container>
-        <ProfileContainer>
-          <View style={{ justifyContent: "center" }}>
-            <HeadingText>Welcome Back,</HeadingText>
-            <Name>{name}</Name>
-          </View>
-
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <ProfilePicture source={require("../../assets/giraffe.png")} />
-          </TouchableOpacity>
-        </ProfileContainer>
-
-        <Spacer>
-          <SearchContainer>
-            <Icon name="search" />
-            <SearchBar placeholder="Search" />
-          </SearchContainer>
-
-          <MainBanner>
-            <BannerSection>
-              <BannerText>What do you want to learn today ?</BannerText>
-              <Button onPress={() => navigation.navigate("CourseList")}>
-                <ButtonText>Get Started</ButtonText>
-              </Button>
-            </BannerSection>
-            <BannerImage source={require("../../assets/character.png")} />
-          </MainBanner>
-
-          <CourseHeader>Popular Course</CourseHeader>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginBottom: 20,
-            }}
-          >
-            <CourseCard1>
-              <CourseName>Javascript</CourseName>
-              <View>
-                <CourseIcon source={require("../../assets/js.png")} />
-              </View>
-            </CourseCard1>
-            <CourseCard3>
-              <CourseName>React</CourseName>
-              <CourseIcon source={require("../../assets/js.png")} />
-            </CourseCard3>
-          </View>
-
-          <CourseHeader>Challenges</CourseHeader>
-          <CompetitionBanner>
-            <CompetitionImage source={require("../../assets/character2.png")} />
-            <View style={{ padding: 16 }}>
-              <CompetitionText>10-days challenge</CompetitionText>
-              <CompetitionText2>Beginner Level</CompetitionText2>
-              <CompetitionButton
-                onPress={() => navigation.navigate("CompetitionList")}
-              >
-                <ButtonText>Join Now</ButtonText>
-              </CompetitionButton>
+        <ScrollView>
+          <ProfileContainer>
+            <View style={{ justifyContent: "center" }}>
+              <HeadingText>Welcome Back,</HeadingText>
+              <Name>{name}</Name>
             </View>
-          </CompetitionBanner>
-        </Spacer>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <ProfilePicture source={avatar} />
+            </TouchableOpacity>
+          </ProfileContainer>
+
+          <Spacer>
+            <SearchContainer>
+              <Icon name="search" />
+              <SearchBar placeholder="Search" />
+            </SearchContainer>
+
+            <MainBanner>
+              <BannerSection>
+                <BannerText>What do you want to learn today ?</BannerText>
+                <Button onPress={() => navigation.navigate("CourseList")}>
+                  <ButtonText>Get Started</ButtonText>
+                </Button>
+              </BannerSection>
+              <BannerImage source={require("../../assets/character.png")} />
+            </MainBanner>
+
+            <CourseHeader>Popular Course</CourseHeader>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginBottom: 20,
+              }}
+            >
+              <CourseCard1>
+                <CourseName>Javascript</CourseName>
+                <View>
+                  <CourseIcon source={require("../../assets/js.png")} />
+                </View>
+              </CourseCard1>
+              <CourseCard3>
+                <CourseName>React</CourseName>
+                <CourseIcon source={require("../../assets/js.png")} />
+              </CourseCard3>
+            </View>
+
+            <CourseHeader>Challenges</CourseHeader>
+            <CompetitionBanner>
+              <CompetitionImage
+                source={require("../../assets/character2.png")}
+              />
+              <View style={{ padding: 16 }}>
+                <CompetitionText>10-days challenge</CompetitionText>
+                <CompetitionText2>Beginner Level</CompetitionText2>
+                <CompetitionButton
+                  onPress={() => navigation.navigate("CompetitionList")}
+                >
+                  <ButtonText>Join Now</ButtonText>
+                </CompetitionButton>
+              </View>
+            </CompetitionBanner>
+          </Spacer>
+        </ScrollView>
       </Container>
     </SafeArea>
   );

@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components/native";
 import {
   View,
   Text,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  ScrollView,
   SafeAreaView,
   StatusBar,
   Image,
@@ -17,6 +12,7 @@ import {
 import { ChallengeCard } from "../components/ChallengeCard";
 import { Header } from "../components/Header";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
   ${StatusBar.currentHeight && `padding-top: ${StatusBar.currentHeight}px`};
@@ -30,7 +26,7 @@ const Container = styled(View)`
 `;
 
 const LeaderboardContainer = styled(View)`
-  height: 150px;
+  height: 180px;
   border-radius: 20px;
   padding: 12px;
   flex-direction: row;
@@ -112,11 +108,17 @@ const openPlayStore = () => {
 };
 
 export const CompetitionListScreen = ({ navigation }) => {
+  const { leaderboard, getLeaderboard } = useContext(UserContext);
   const [isModalVisible, setModalVisible] = useState(false);
+  console.log(leaderboard[0]);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
+  useEffect(() => {
+    getLeaderboard();
+  }, []);
 
   return (
     <SafeArea>
@@ -126,20 +128,22 @@ export const CompetitionListScreen = ({ navigation }) => {
           <ProfileContainer>
             <Rank>2</Rank>
             <ProfilePicture source={require("../../assets/giraffe.png")} />
-
-            <Name>Finsen Antonius</Name>
+            <Name>{leaderboard[1].name}</Name>
+            <Name>{leaderboard[1].score}</Name>
           </ProfileContainer>
+
           <ProfileContainer>
             <Icon name="crown" />
             <ProfilePictureBig source={require("../../assets/giraffe.png")} />
-
-            <Name>Finsen Antonius</Name>
+            <Name>{leaderboard[0].name}</Name>
+            <Name>{leaderboard[0].score}</Name>
           </ProfileContainer>
+
           <ProfileContainer>
             <Rank>3</Rank>
             <ProfilePicture source={require("../../assets/giraffe.png")} />
-
-            <Name>Finsen Antonius</Name>
+            <Name>{leaderboard[2].name}</Name>
+            <Name>{leaderboard[2].score}</Name>
           </ProfileContainer>
         </LeaderboardContainer>
 
