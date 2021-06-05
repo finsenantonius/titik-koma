@@ -45,8 +45,8 @@ export const AuthProvider = ({ children }) => {
           console.log(e);
         }
       })
-      .catch(() => {
-        console.log("haha");
+      .catch((error) => {
+        console.log(error);
         setAlert("Email atau password salah");
       });
   };

@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
-import {
-  View,
-  ScrollView,
-  SafeAreaView,
-  StatusBar,
-  FlatList,
-} from "react-native";
+import { View, SafeAreaView, StatusBar, FlatList } from "react-native";
 import { Course } from "../components/Course";
 import { Header } from "../components/Header";
 
@@ -34,6 +28,12 @@ const course = [
 ];
 
 export const CourseListScreen = ({ navigation }) => {
+  const navigate = (courseName) => {
+    navigation.navigate("CourseDetail", {
+      courseName: courseName,
+    });
+  };
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Course" />
@@ -43,7 +43,7 @@ export const CourseListScreen = ({ navigation }) => {
           data={course}
           keyExtractor={(course) => course.name}
           renderItem={({ item }) => {
-            return <Course data={item} />;
+            return <Course data={item} navigate={() => navigate(item.name)} />;
           }}
         />
       </Container>

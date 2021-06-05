@@ -1,1 +1,2 @@
-export default URL = "http://e64db34b8013.ngrok.io";
+export default URL = "https://titik-koma-api.herokuapp.com";
+// export default URL = "http://b9e61a7f5785.ngrok.io";

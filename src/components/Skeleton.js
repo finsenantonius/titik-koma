@@ -26,11 +26,26 @@ export const SkeletonImageLeaderboard = ({ children, load }) => {
   );
 };
 
+export const SkeletonVideo = ({ children, load }) => {
+  return (
+    <SkeletonContent
+      isLoading={load}
+      layout={[{ width: "100%", height: 225 }]}
+      containerStyle={styles.video}
+    >
+      {children}
+    </SkeletonContent>
+  );
+};
+
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
   },
   image: {
+    margin: 0,
+  },
+  video: {
     margin: 0,
   },
 });
