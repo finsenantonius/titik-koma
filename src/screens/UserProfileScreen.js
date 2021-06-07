@@ -129,7 +129,7 @@ export const UserProfileScreen = ({ navigation }) => {
             <View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Name>{name}</Name>
-                <MaterialIcons name="verified" style={styles.verified} />
+                {/* <MaterialIcons name="verified" style={styles.verified} /> */}
               </View>
               {/* <Bio>Suka ngoding</Bio> */}
 

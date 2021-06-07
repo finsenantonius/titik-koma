@@ -44,6 +44,13 @@ const Name = styled(Text)`
   font-size: 18px;
 `;
 
+const Logo = styled(Text)`
+  font-family: Jakarta-Sans;
+  font-size: 24px;
+  color: #0e4a86;
+  letter-spacing: 1px;
+`;
+
 const ProfilePicture = styled(Image)`
   width: 40px;
   height: 40px;
@@ -202,8 +209,12 @@ export const DashboardScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Container>
+        <ProfileContainer style={{ marginBottom: 12 }}>
+          <Logo>titik koma;</Logo>
+        </ProfileContainer>
+
         <ScrollView>
-          <ProfileContainer>
+          <ProfileContainer style={{ marginTop: 4 }}>
             <View style={{ justifyContent: "center" }}>
               <HeadingText>Welcome Back,</HeadingText>
               <Name>{name}</Name>
@@ -215,15 +226,10 @@ export const DashboardScreen = ({ navigation }) => {
           </ProfileContainer>
 
           <Spacer>
-            <SearchContainer>
-              <Icon name="search" />
-              <SearchBar placeholder="Search" />
-            </SearchContainer>
-
             <MainBanner>
               <BannerSection>
                 <BannerText>What do you want to learn today ?</BannerText>
-                <Button onPress={() => navigation.navigate("CourseList")}>
+                <Button onPress={() => navigation.navigate("ModulList")}>
                   <ButtonText>Get Started</ButtonText>
                 </Button>
               </BannerSection>
@@ -238,15 +244,35 @@ export const DashboardScreen = ({ navigation }) => {
                 marginBottom: 20,
               }}
             >
-              <CourseCard1>
+              <CourseCard1
+                onPress={() => {
+                  navigation.navigate("CourseList", {
+                    courseName: "Javascript",
+                  });
+                }}
+              >
                 <CourseName>Javascript</CourseName>
                 <View>
-                  <CourseIcon source={require("../../assets/js.png")} />
+                  <CourseIcon
+                    source={{
+                      uri: "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
+                    }}
+                  />
                 </View>
               </CourseCard1>
-              <CourseCard3>
+              <CourseCard3
+                onPress={() => {
+                  navigation.navigate("CourseList", {
+                    courseName: "React",
+                  });
+                }}
+              >
                 <CourseName>React</CourseName>
-                <CourseIcon source={require("../../assets/js.png")} />
+                <CourseIcon
+                  source={{
+                    uri: "https://titik-koma-assets.herokuapp.com/image/ff29af7f13d19f908f5964f49e375107.png",
+                  }}
+                />
               </CourseCard3>
             </View>
 

@@ -121,7 +121,7 @@ export const CompetitionListScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getLeaderboard();
+    navigation.addListener("focus", () => getLeaderboard());
   }, []);
 
   const getAvatarImage = (avatar) => {

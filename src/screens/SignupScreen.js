@@ -105,7 +105,7 @@ export const SignupScreen = ({ navigation }) => {
           <Container>
             <Spacer>
               <HeaderContainer>
-                <HeaderText>Hello!</HeaderText>
+                <HeaderText>Hallo!</HeaderText>
                 <HeaderText>Sign up to get started</HeaderText>
                 {/* <HeaderText>get started</HeaderText> */}
               </HeaderContainer>
@@ -140,13 +140,13 @@ export const SignupScreen = ({ navigation }) => {
               ) : null}
 
               <Button onPress={() => signUp({ name, email, password })}>
-                <ButtonText>Sign up</ButtonText>
+                <ButtonText>Daftar</ButtonText>
               </Button>
 
               <NavContainer>
-                <NavText>Already Have An Account? </NavText>
+                <NavText>Sudah punya akun? </NavText>
                 <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
-                  <NavLink>Sign in</NavLink>
+                  <NavLink>Masuk</NavLink>
                 </TouchableOpacity>
               </NavContainer>
             </Spacer>

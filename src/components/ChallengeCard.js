@@ -56,7 +56,11 @@ export const ChallengeCard = ({ navigate }) => {
   return (
     <Container onPress={navigate}>
       <Wrapper>
-        <CourseIcon source={require("../../assets/js.png")} />
+        <CourseIcon
+          source={{
+            uri: "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
+          }}
+        />
         <TitleContainer>
           <CourseName>Javascript</CourseName>
           <DescriptionText>5 Pertanyaan Dasar Javascript</DescriptionText>

@@ -100,8 +100,8 @@ export const SigninScreen = ({ navigation }) => {
           <Container>
             <Spacer>
               <HeaderContainer>
-                <HeaderText>Hello Again!</HeaderText>
-                <HeaderText>Welcome back</HeaderText>
+                <HeaderText>Hallo!</HeaderText>
+                <HeaderText>Selamat datang</HeaderText>
               </HeaderContainer>
               <Input
                 autoCapitalize="none"
@@ -122,21 +122,13 @@ export const SigninScreen = ({ navigation }) => {
               />
               {alert ? <AlertText>{alert}</AlertText> : null}
               <Button onPress={() => signIn({ email, password })}>
-                <ButtonText>Sign In</ButtonText>
+                <ButtonText>Masuk</ButtonText>
               </Button>
 
               <NavContainer>
-                <NavText>Forgot Your Password ?</NavText>
+                <NavText>Belum punya akun ?</NavText>
                 <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-                  <NavLink>Sign up</NavLink>
-                </TouchableOpacity>
-              </NavContainer>
-
-              <NavContainer>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Dashboard")}
-                >
-                  <NavLink>To dashboard</NavLink>
+                  <NavLink>Daftar</NavLink>
                 </TouchableOpacity>
               </NavContainer>
             </Spacer>

@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AuthProvider, AuthContext } from "./src/context/AuthContext";
 import { UserProvider } from "./src/context/UserContext";
 import { CourseProvider } from "./src/context/CourseContext";
+import { useFonts } from "expo-font";
 
 import {
   useFonts as usePoppins,
@@ -30,6 +31,7 @@ import { VoucherScreen } from "./src/screens/VoucherScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
 import { ChangePasswordScreen } from "./src/screens/ChangePasswordScreen";
 import { EditProfileScreen } from "./src/screens/EditProfile";
+import { ModulListScreen } from "./src/screens/ModulList";
 import { CourseListScreen } from "./src/screens/CourseList";
 import { CourseDetailScreen } from "./src/screens/CourseDetail";
 import { CompetitionListScreen } from "./src/screens/CompetitionList";
@@ -50,7 +52,7 @@ const AuthStack = () => {
 
   setTimeout(() => {
     setIsLoading(false);
-  }, 2000);
+  }, 3000);
   if (isLoading) {
     return <SplashScreen />;
   }
@@ -68,6 +70,7 @@ const AuthStack = () => {
           />
           <Stack.Screen name="EditProfile" component={EditProfileScreen} />
           <Stack.Screen name="ChangePhoto" component={ChangePhotoScreen} />
+          <Stack.Screen name="ModulList" component={ModulListScreen} />
           <Stack.Screen name="CourseList" component={CourseListScreen} />
           <Stack.Screen name="CourseDetail" component={CourseDetailScreen} />
           <Stack.Screen
@@ -103,7 +106,11 @@ export default function App() {
     PlayfairDisplay_700Bold,
   });
 
-  if (!poppinsLoaded || !playfairLoaded) {
+  let [jakartaLoaded] = useFonts({
+    "Jakarta-Sans": require("./assets/fonts/PlusJakartaDisplay-Bold.otf"),
+  });
+
+  if (!poppinsLoaded || !playfairLoaded || !jakartaLoaded) {
     return null;
   }
 

@@ -19,7 +19,9 @@ const Wrapper = styled(View)`
   flex-direction: row;
 `;
 
-const TitleContainer = styled(View)``;
+const TitleContainer = styled(View)`
+  justify-content: center;
+`;
 
 const CourseName = styled(Text)`
   font-size: 18px
@@ -45,14 +47,28 @@ const CourseIcon = styled(Image)`
   margin-right: 12px;
 `;
 
+export const Modul = ({ data, navigate }) => {
+  return (
+    <Container onPress={navigate}>
+      <Wrapper>
+        <CourseIcon source={{ uri: data.modulThumbnail }} />
+        <TitleContainer>
+          <CourseName>{data.modulName}</CourseName>
+        </TitleContainer>
+      </Wrapper>
+      <Arrow name="chevron-right" />
+    </Container>
+  );
+};
+
 export const Course = ({ data, navigate }) => {
   return (
     <Container onPress={navigate}>
       <Wrapper>
-        <CourseIcon source={require("../../assets/js.png")} />
+        <CourseIcon source={{ uri: data.courseThumbnail }} />
         <TitleContainer>
-          <CourseName>{data.name}</CourseName>
-          <DescriptionText>{data.description}</DescriptionText>
+          <CourseName>{data.courseTitle}</CourseName>
+          <DescriptionText>Tingkat: {data.courseLevel}</DescriptionText>
         </TitleContainer>
       </Wrapper>
       <Arrow name="chevron-right" />

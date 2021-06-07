@@ -5,14 +5,10 @@ import axios from "axios";
 export const CourseContext = createContext();
 
 export const CourseProvider = ({ children }) => {
-  const [courseTitle, setCourseTitle] = useState("");
-  const [courseDesc, setCourseDesc] = useState("");
-  const [courseFile, setCourseFile] = useState("");
-  const [courseLanguage, setcourseLanguage] = useState("");
-  const [courseLevel, setCourseLevel] = useState("");
-  const [courseCreated, setCourseCreated] = useState("");
-  const [courseAuthor, setCourseAuthor] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [modul, setModul] = useState([]);
+  const [loadModul, setLoadModul] = useState(true);
+  const [course, setCourse] = useState([]);
+  const [loadCourse, setloadCourse] = useState(true);
 
   const getAllCourse = () => {
     const url = URL + "/api/course/getAllCourse";
@@ -27,19 +23,26 @@ export const CourseProvider = ({ children }) => {
       });
   };
 
+  const getAllModul = () => {
+    const url = URL + "/api/course/getAllModul";
+    axios
+      .get(url)
+      .then((res) => {
+        setModul(res.data);
+        setLoadModul(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getCourse = ({ courseName }) => {
     const url = URL + `/api/course/getSpecificCourse/${courseName}`;
     axios
       .get(url)
       .then((res) => {
-        setCourseTitle(res.data.courseTitle);
-        setCourseDesc(res.data.courseDescription);
-        setCourseFile(res.data.courseFile);
-        setcourseLanguage(res.data.courseLanguage);
-        setCourseLevel(res.data.courseLevel);
-        setCourseCreated(res.data.courseCreated);
-        setCourseAuthor(res.data.courseAuthor);
-        setLoading(false);
+        setCourse(res.data);
+        setloadCourse(false);
       })
       .catch((err) => {
         console.log(err);
@@ -47,18 +50,20 @@ export const CourseProvider = ({ children }) => {
       });
   };
 
-  const data = {
-    courseTitle,
-    courseDesc,
-    courseFile,
-    courseLanguage,
-    courseLevel,
-    courseCreated,
-    courseAuthor,
-  };
-
   return (
-    <CourseContext.Provider value={{ loading, data, getAllCourse, getCourse }}>
+    <CourseContext.Provider
+      value={{
+        modul,
+        loadModul,
+        course,
+        loadCourse,
+        getAllCourse,
+        getAllModul,
+        getCourse,
+        setCourse,
+        setloadCourse,
+      }}
+    >
       {children}
     </CourseContext.Provider>
   );

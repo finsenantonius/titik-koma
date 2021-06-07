@@ -38,6 +38,21 @@ export const SkeletonVideo = ({ children, load }) => {
   );
 };
 
+export const SkeletonModul = ({ children, load }) => {
+  return (
+    <SkeletonContent
+      isLoading={load}
+      layout={[
+        { width: "100%", height: 82, marginVertical: 6 },
+        { width: "100%", height: 82, marginVertical: 6 },
+      ]}
+      containerStyle={styles.modul}
+    >
+      {children}
+    </SkeletonContent>
+  );
+};
+
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
@@ -47,5 +62,8 @@ const styles = StyleSheet.create({
   },
   video: {
     margin: 0,
+  },
+  modul: {
+    marginTop: 8,
   },
 });

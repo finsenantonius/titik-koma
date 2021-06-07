@@ -90,10 +90,8 @@ export const Challenge5 = ({ navigation }) => {
   const submit = () => {
     if (option4 === true) {
       let totalScore = score + 20;
-      console.log(1, totalScore);
       updateScore({ score: totalScore, navigate });
     } else {
-      console.log(2, score);
       updateScore({ score: score, navigate });
     }
   };

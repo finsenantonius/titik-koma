@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import styled from "styled-components/native";
 import { View, SafeAreaView, StatusBar, FlatList } from "react-native";
-import { Course } from "../components/Course";
+import { Modul } from "../components/Course";
 import { Header } from "../components/Header";
 import { CourseContext } from "../context/CourseContext";
 import { SkeletonModul } from "../components/Skeleton";
@@ -18,35 +18,36 @@ const Container = styled(View)`
   padding-horizontal: 16px;
 `;
 
-export const CourseListScreen = ({ route, navigation }) => {
-  const { getCourse, course, loadCourse } = useContext(CourseContext);
-  const navigate = (courseName, courseData) => {
-    navigation.navigate("CourseDetail", {
+export const ModulListScreen = ({ navigation }) => {
+  const { getAllModul, modul, loadModul, setCourse, setloadCourse } =
+    useContext(CourseContext);
+
+  const navigate = (courseName) => {
+    navigation.navigate("CourseList", {
       courseName: courseName,
-      data: courseData,
     });
   };
 
-  const { courseName } = route.params;
   useEffect(() => {
-    getCourse({ courseName });
+    navigation.addListener("focus", () => {
+      setCourse([]);
+      setloadCourse(true);
+    });
+    getAllModul();
   }, []);
 
   return (
     <SafeArea>
-      <Header navigate={() => navigation.goBack()} title={courseName} />
+      <Header navigate={() => navigation.goBack()} title="Course" />
       <Container>
-        <SkeletonModul load={loadCourse}>
+        <SkeletonModul load={loadModul}>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={course}
-            keyExtractor={(course) => course.courseTitle}
+            data={modul}
+            keyExtractor={(modul) => modul.modulName}
             renderItem={({ item }) => {
               return (
-                <Course
-                  data={item}
-                  navigate={() => navigate(item.courseName, item)}
-                />
+                <Modul data={item} navigate={() => navigate(item.modulName)} />
               );
             }}
           />

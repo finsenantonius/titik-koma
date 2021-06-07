@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
       try {
         const token = await AsyncStorage.getItem("@token");
         if (token !== null) {
-          console.log(token);
           setIsLoggedIn(true);
         }
       } catch (e) {

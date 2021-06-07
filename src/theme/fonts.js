@@ -5,6 +5,7 @@ export const fonts = {
   bodyBold: "Poppins_700Bold",
   bodySemiBold: "Poppins_600SemiBold",
   body: "Poppins_400Regular",
+  logo: "Jakarta-Sans",
 };
 
 export const fontWeights = {

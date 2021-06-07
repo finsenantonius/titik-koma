@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Video, AVPlaybackStatus } from "expo-av";
+import { Video } from "expo-av";
 import styled from "styled-components/native";
 import {
   View,
@@ -63,6 +63,14 @@ const TableText = styled(Text)`
   color: black;
 `;
 
+const CourseCard1 = styled(TouchableOpacity)`
+  height: 110px;
+  width: 180px;
+  background-color: #fff5e5;
+  border-radius: 10px;
+  padding: 16px;
+`;
+
 const CourseCard3 = styled(TouchableOpacity)`
   height: 110px;
   width: 180px;
@@ -84,14 +92,15 @@ const CourseIcon = styled(Image)`
 `;
 
 export const CourseDetailScreen = ({ route, navigation }) => {
-  const { loading, data, getCourse } = useContext(CourseContext);
+  const { setCourse, setloadCourse } = useContext(CourseContext);
   const video = useRef(null);
   const [status, setStatus] = useState({});
-  const { courseName } = route.params;
+  const [loading, setLoading] = useState(true);
+  const { courseName, data } = route.params;
 
-  useEffect(() => {
-    getCourse({ courseName });
-  }, []);
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
 
   return (
     <SafeArea>
@@ -112,7 +121,7 @@ export const CourseDetailScreen = ({ route, navigation }) => {
           <ContentContainer>
             <Section>
               <CourseHeader>{data.courseTitle}</CourseHeader>
-              <DescriptionText>{data.courseDesc}</DescriptionText>
+              <DescriptionText>{data.courseDescription}</DescriptionText>
             </Section>
             <Section>
               <CourseHeader style={{ marginBottom: 10 }}>
@@ -146,10 +155,41 @@ export const CourseDetailScreen = ({ route, navigation }) => {
 
             <Section>
               <CourseHeader>Kelas Terkait</CourseHeader>
-              <CourseCard3>
-                <CourseName>React</CourseName>
-                <CourseIcon source={require("../../assets/js.png")} />
-              </CourseCard3>
+              {courseName === "Javascript" ? (
+                <CourseCard3
+                  key={data.courseName}
+                  onPress={() => {
+                    navigation.navigate("CourseList", {
+                      courseName: "React",
+                    });
+                  }}
+                >
+                  <CourseName>React</CourseName>
+                  <CourseIcon
+                    source={{
+                      uri: "https://titik-koma-assets.herokuapp.com/image/ff29af7f13d19f908f5964f49e375107.png",
+                    }}
+                  />
+                </CourseCard3>
+              ) : (
+                <CourseCard1
+                  key={data.courseName}
+                  onPress={() => {
+                    navigation.navigate("CourseList", {
+                      courseName: "Javascript",
+                    });
+                  }}
+                >
+                  <CourseName>Javascript</CourseName>
+                  <View>
+                    <CourseIcon
+                      source={{
+                        uri: "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
+                      }}
+                    />
+                  </View>
+                </CourseCard1>
+              )}
             </Section>
           </ContentContainer>
         </Container>
