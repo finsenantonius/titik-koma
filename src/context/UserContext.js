@@ -10,11 +10,18 @@ export const UserProvider = ({ children }) => {
   const [name, setName] = useState("");
   const [score, setScore] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [isRedeemVoucher, setIsRedeemVoucher] = useState("");
   const [credential, setCredential] = useState("");
-  const [alertPassword, setAlertPassword] = useState("");
-  const [onError, setOnError] = useState(false);
   const [leaderboard, setLeaderboard] = useState("");
   const [loadLeaderboard, setLoadLeaderboard] = useState(true);
+  const [offline, setOffline] = useState(false);
+
+  const [onError, setOnError] = useState(false);
+  const [alertVoucher, setAlertVoucher] = useState("");
+  const [voucherError, setVoucherError] = useState("");
+  const [alertPassword, setAlertPassword] = useState("");
+  const [alertFeedback, setAlertFeedback] = useState("");
+  const [errorFeedback, setErrorFeedback] = useState("");
 
   useEffect(() => {
     getUser();
@@ -31,10 +38,10 @@ export const UserProvider = ({ children }) => {
             setId(res.data._id);
             setName(res.data.name);
             setScore(res.data.score);
+            setIsRedeemVoucher(res.data.isRedeemVoucher);
             getAvatarImage(res.data.avatar);
-            console.log(res.data.score);
           })
-          .catch((err) => console.log("gagal user"));
+          .catch((err) => setOffline(true));
       }
     } catch (e) {
       console.log("kamu ketauan");
@@ -70,8 +77,8 @@ export const UserProvider = ({ children }) => {
           console.log(e);
         }
       })
-      .catch(() => {
-        console.log("haha");
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -143,6 +150,25 @@ export const UserProvider = ({ children }) => {
       });
   };
 
+  const redeemVoucher = ({ isRedeemVoucher, navigate }) => {
+    const url = URL + "/api/user/redeemVoucher";
+    axios
+      .patch(url, { id: id, isRedeemVoucher: isRedeemVoucher })
+      .then((res) => {
+        console.log(res.data);
+        setAlertVoucher(
+          `Kode voucher berhasil digunakan, silahkan cek hadiah di menu "Reward Saya"`
+        );
+        setVoucherError("");
+        signIn({ navigate });
+      })
+      .catch((err) => {
+        console.log(err);
+        setAlertVoucher("");
+        setVoucherError(`Koneksi bermasalah, Silahkan coba lagi.`);
+      });
+  };
+
   const getLeaderboard = () => {
     const url = URL + "/api/user/getAllProfile";
     axios
@@ -156,15 +182,40 @@ export const UserProvider = ({ children }) => {
       });
   };
 
+  const sendFeedback = ({ feedback }) => {
+    const url = URL + "/api/feedback/addFeedback";
+    const data = {
+      uid: id,
+      name: name,
+      feedback: feedback,
+    };
+    axios
+      .post(url, data)
+      .then((res) => {
+        setAlertFeedback("Terima kasih atas feedback Anda.");
+        setErrorFeedback("");
+      })
+      .catch((err) => {
+        setAlertFeedback("");
+        setErrorFeedback("Terjadi kesalahan. Silahkan coba lagi");
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
+        offline,
         name,
         alertPassword,
         onError,
         leaderboard,
         avatar,
+        isRedeemVoucher,
         loadLeaderboard,
+        alertVoucher,
+        voucherError,
+        alertFeedback,
+        errorFeedback,
         updateProfile,
         getCredential,
         getUser,
@@ -173,6 +224,12 @@ export const UserProvider = ({ children }) => {
         updateScore,
         getLeaderboard,
         updateAvatar,
+        redeemVoucher,
+        setAlertVoucher,
+        setVoucherError,
+        sendFeedback,
+        setAlertFeedback,
+        setErrorFeedback,
       }}
     >
       {children}

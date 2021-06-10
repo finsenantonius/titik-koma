@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/native";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-} from "react-native";
+import { View, Text, SafeAreaView, Image, StatusBar } from "react-native";
 import { Header } from "../components/Header";
+import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -24,13 +17,6 @@ const Container = styled(View)`
   align-items: center;
 `;
 
-const HeaderText = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.bodySemiBold};
-  font-size: 24px;
-  color: #0e4a86;
-  margin-bottom: 16px;
-`;
-
 const NoReward = styled(Text)`
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   font-size: 16px;
@@ -38,40 +24,60 @@ const NoReward = styled(Text)`
   margin-bottom: 16px;
 `;
 
-const Input = styled(TextInput)`
-  height: 60px;
-  margin-bottom: 12px;
-  elevation: 1;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 16px;
-  font-size: 16px;
-  font-family: ${(props) => props.theme.fonts.bodySemiBold};
-`;
-
-const Button = styled(TouchableOpacity)`
-  height: 60px;
+const Card = styled(View)`
+  height: 82px;
   width: 100%;
-  background-color: #0e4a86;
   border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12px
-  margin-bottom: 12px;
+  background-color: #FFF
+  padding: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+  elevation: 2;
+  margin-vertical: 6px;
 `;
 
-const ButtonText = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.bodyBold};
-  font-size: 16px
-  color: #fff;
+const Wrapper = styled(View)`
+  flex-direction: row;
+`;
+
+const TitleContainer = styled(View)`
+  justify-content: center;
+`;
+
+const CourseName = styled(Text)`
+  font-size: 18px
+  font-family: ${(props) => props.theme.fonts.body};
+  color: black;
+`;
+
+const CourseIcon = styled(Image)`
+  height: 50px;
+  width: 50px;
+  margin-right: 12px;
 `;
 
 export const RewardScreen = ({ navigation }) => {
+  const { isRedeemVoucher } = useContext(UserContext);
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Reward" />
       <Container>
-        <NoReward>Kamu tidak punya reward saat ini.</NoReward>
+        {isRedeemVoucher ? (
+          <Card>
+            <Wrapper>
+              <CourseIcon
+                source={{
+                  uri: "https://titik-koma-assets.herokuapp.com/image/ff29af7f13d19f908f5964f49e375107.png",
+                }}
+              />
+              <TitleContainer>
+                <CourseName>React 2021</CourseName>
+              </TitleContainer>
+            </Wrapper>
+          </Card>
+        ) : (
+          <NoReward>Kamu tidak punya reward saat ini.</NoReward>
+        )}
       </Container>
     </SafeArea>
   );

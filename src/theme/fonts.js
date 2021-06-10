@@ -1,5 +1,6 @@
 export const fonts = {
   heading: "PlayfairDisplay_400Regular",
+  headingMedium: "PlayfairDisplay_500Medium",
   headingSemiBold: "PlayfairDisplay_600SemiBold",
   headingBold: "PlayfairDisplay_700Bold",
   bodyBold: "Poppins_700Bold",

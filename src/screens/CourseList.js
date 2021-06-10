@@ -4,6 +4,7 @@ import { View, SafeAreaView, StatusBar, FlatList } from "react-native";
 import { Course } from "../components/Course";
 import { Header } from "../components/Header";
 import { CourseContext } from "../context/CourseContext";
+import { UserContext } from "../context/UserContext";
 import { SkeletonModul } from "../components/Skeleton";
 
 export const SafeArea = styled(SafeAreaView)`
@@ -20,6 +21,7 @@ const Container = styled(View)`
 
 export const CourseListScreen = ({ route, navigation }) => {
   const { getCourse, course, loadCourse } = useContext(CourseContext);
+  const { isRedeemVoucher } = useContext(UserContext);
   const navigate = (courseName, courseData) => {
     navigation.navigate("CourseDetail", {
       courseName: courseName,
@@ -46,6 +48,7 @@ export const CourseListScreen = ({ route, navigation }) => {
                 <Course
                   data={item}
                   navigate={() => navigate(item.courseName, item)}
+                  isRedeemVoucher={isRedeemVoucher}
                 />
               );
             }}

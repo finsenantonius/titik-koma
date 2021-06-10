@@ -17,6 +17,15 @@ const HeaderContainer = styled(View)`
   elevation: 2;
 `;
 
+const BlogHeaderContainer = styled(View)`
+  height: 50px;
+  padding: 14px;
+  flex-direction: row;
+  background-color: #fff;
+  flex-direction: row;
+  elevation: 2;
+`;
+
 const Icon = styled(MaterialIcons)`
   color: black;
   font-size: 22px;
@@ -65,6 +74,21 @@ export const ChallengeHeader = ({ title }) => {
           <ChallengeTitle>{title}</ChallengeTitle>
         </TitleContainer>
       </HeaderContainer>
+    </Container>
+  );
+};
+
+export const BlogHeader = ({ navigate, title }) => {
+  return (
+    <Container>
+      <BlogHeaderContainer>
+        <TouchableOpacity onPress={navigate}>
+          <Icon name="arrow-back" />
+        </TouchableOpacity>
+        <TitleContainer>
+          <Title>{title}</Title>
+        </TitleContainer>
+      </BlogHeaderContainer>
     </Container>
   );
 };

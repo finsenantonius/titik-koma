@@ -6,8 +6,8 @@ import styled from "styled-components";
 const Container = styled(TouchableOpacity)`
   height: 82px;
   width: 100%;
-  background-color: #fff;
   border-radius: 10px;
+  background-color: #FFF
   padding: 16px;
   flex-direction: row;
   justify-content: space-between;
@@ -61,9 +61,18 @@ export const Modul = ({ data, navigate }) => {
   );
 };
 
-export const Course = ({ data, navigate }) => {
+export const Course = ({ data, navigate, isRedeemVoucher }) => {
+  let disable = false;
+  if (data.courseName === "React" && !isRedeemVoucher) {
+    disable = true;
+  }
+
   return (
-    <Container onPress={navigate}>
+    <Container
+      onPress={navigate}
+      style={{ backgroundColor: disable ? "#DCDCDC" : "#FFF" }}
+      disabled={disable}
+    >
       <Wrapper>
         <CourseIcon source={{ uri: data.courseThumbnail }} />
         <TitleContainer>
@@ -71,7 +80,10 @@ export const Course = ({ data, navigate }) => {
           <DescriptionText>Tingkat: {data.courseLevel}</DescriptionText>
         </TitleContainer>
       </Wrapper>
-      <Arrow name="chevron-right" />
+      <Arrow
+        name="chevron-right"
+        style={{ display: disable ? "none" : null }}
+      />
     </Container>
   );
 };

@@ -45,7 +45,6 @@ const Input = styled(TextInput)`
 const Button = styled(TouchableOpacity)`
   height: 60px;
   width: 100%;
-  background-color: #0e4a86;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -69,67 +68,52 @@ const AlertTextError = styled(Text)`
   color: red
 `;
 
-export const VoucherScreen = ({ navigation }) => {
+export const FeedbackScreen = ({ navigation }) => {
   const {
-    redeemVoucher,
-    alertVoucher,
-    voucherError,
-    setAlertVoucher,
-    getCredential,
-    isRedeemVoucher,
-    setVoucherError,
+    sendFeedback,
+    alertFeedback,
+    errorFeedback,
+    setAlertFeedback,
+    setErrorFeedback,
   } = useContext(UserContext);
-  const [usedVoucher, setUsedVoucher] = useState("");
-  const [voucher, setVoucher] = useState("");
-  const [errorVoucher, setErrorVoucher] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const submitFeedback = () => {
+    sendFeedback({ feedback: feedback });
+  };
 
   useEffect(() => {
-    getCredential();
     navigation.addListener("focus", () => {
-      setAlertVoucher("");
-      setVoucherError("");
+      setAlertFeedback("");
+      setErrorFeedback("");
     });
   }, []);
 
-  const navigate = () => {
-    navigation.navigate("Voucher");
-  };
-
-  const submitVoucher = () => {
-    if (isRedeemVoucher === true && voucher === "TITIKKOMA2021") {
-      setUsedVoucher("Kode voucher sudah digunakan.");
-      setErrorVoucher("");
-    } else if (voucher === "TITIKKOMA2021") {
-      redeemVoucher({ isRedeemVoucher: true, navigate });
-      setErrorVoucher("");
-    } else {
-      setErrorVoucher("Kode voucher salah.");
-    }
-  };
-
   return (
     <SafeArea>
-      <Header navigate={() => navigation.goBack()} title="Kode Voucher" />
+      <Header navigate={() => navigation.goBack()} title="Feedback" />
       <Container>
-        <HeaderText>Masukkan kode voucher untuk mendapat hadiah.</HeaderText>
+        <HeaderText>Masukkan feedback Anda.</HeaderText>
         <Input
           autoCapitalize="none"
           autoCorrect={false}
           label="Voucher"
-          placeholder="Masukkan kode voucher"
-          value={voucher}
-          onChangeText={setVoucher}
+          placeholder="Masukkan feedback"
+          value={feedback}
+          onChangeText={setFeedback}
         />
-        {usedVoucher ? (
-          <AlertTextSuccess>{usedVoucher}</AlertTextSuccess>
+        {alertFeedback ? (
+          <AlertTextSuccess>{alertFeedback}</AlertTextSuccess>
         ) : null}
-        {alertVoucher ? (
-          <AlertTextSuccess>{alertVoucher}</AlertTextSuccess>
+        {errorFeedback ? (
+          <AlertTextError>{errorFeedback}</AlertTextError>
         ) : null}
-        {voucherError ? <AlertTextError>{voucherError}</AlertTextError> : null}
-        {errorVoucher ? <AlertTextError>{errorVoucher}</AlertTextError> : null}
-        <Button onPress={submitVoucher}>
-          <ButtonText>Redeem</ButtonText>
+        <Button
+          onPress={submitFeedback}
+          disabled={feedback ? false : true}
+          style={{ backgroundColor: feedback ? "#0e4a86" : "#546e87" }}
+        >
+          <ButtonText>Kirim</ButtonText>
         </Button>
       </Container>
     </SafeArea>

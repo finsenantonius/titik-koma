@@ -18,6 +18,7 @@ import {
 import {
   useFonts as usePlayfair,
   PlayfairDisplay_400Regular,
+  PlayfairDisplay_500Medium,
   PlayfairDisplay_600SemiBold,
   PlayfairDisplay_700Bold,
 } from "@expo-google-fonts/playfair-display";
@@ -28,6 +29,7 @@ import { SignupScreen } from "./src/screens/SignupScreen";
 import { DashboardScreen } from "./src/screens/DashboardScreen";
 import { UserProfileScreen } from "./src/screens/UserProfileScreen";
 import { VoucherScreen } from "./src/screens/VoucherScreen";
+import { FeedbackScreen } from "./src/screens/FeedbackScreen";
 import { RewardScreen } from "./src/screens/RewardScreen";
 import { ChangePasswordScreen } from "./src/screens/ChangePasswordScreen";
 import { EditProfileScreen } from "./src/screens/EditProfile";
@@ -36,6 +38,8 @@ import { CourseListScreen } from "./src/screens/CourseList";
 import { CourseDetailScreen } from "./src/screens/CourseDetail";
 import { CompetitionListScreen } from "./src/screens/CompetitionList";
 import { ChangePhotoScreen } from "./src/screens/ChangePhotoScreen";
+import { BlogListScreen } from "./src/screens/BlogList";
+import { BlogDetailScreen } from "./src/screens/BlogDetail";
 import { SplashScreen } from "./src/screens/SplashScreen";
 
 import { Challenge1 } from "./src/screens/challenges/Challenge1";
@@ -63,6 +67,7 @@ const AuthStack = () => {
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="Profile" component={UserProfileScreen} />
           <Stack.Screen name="Voucher" component={VoucherScreen} />
+          <Stack.Screen name="Feedback" component={FeedbackScreen} />
           <Stack.Screen name="Reward" component={RewardScreen} />
           <Stack.Screen
             name="ChangePassword"
@@ -72,6 +77,8 @@ const AuthStack = () => {
           <Stack.Screen name="ChangePhoto" component={ChangePhotoScreen} />
           <Stack.Screen name="ModulList" component={ModulListScreen} />
           <Stack.Screen name="CourseList" component={CourseListScreen} />
+          <Stack.Screen name="BlogList" component={BlogListScreen} />
+          <Stack.Screen name="BlogDetail" component={BlogDetailScreen} />
           <Stack.Screen name="CourseDetail" component={CourseDetailScreen} />
           <Stack.Screen
             name="CompetitionList"
@@ -102,6 +109,7 @@ export default function App() {
 
   let [playfairLoaded] = usePlayfair({
     PlayfairDisplay_400Regular,
+    PlayfairDisplay_500Medium,
     PlayfairDisplay_600SemiBold,
     PlayfairDisplay_700Bold,
   });

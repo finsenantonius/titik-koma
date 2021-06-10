@@ -5,14 +5,13 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ScrollView,
   SafeAreaView,
   StatusBar,
   Image,
 } from "react-native";
 import { Spacer } from "../components/Spacer";
-import { Feather } from "@expo/vector-icons";
+import { Banner } from "../components/Banner";
 import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
@@ -55,28 +54,6 @@ const ProfilePicture = styled(Image)`
   width: 40px;
   height: 40px;
   border-radius: 10px;
-`;
-
-const SearchContainer = styled(View)`
-  flex-direction: row;
-  background-color: whitesmoke;
-  height: 60px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-`;
-
-const Icon = styled(Feather)`
-  font-size: 22px;
-  align-self: center;
-  color: orange;
-  margin-horizontal: 10px;
-`;
-
-const SearchBar = styled(TextInput)`
-  flex: 1;
-  font-size: 16px;
-  font-family: ${(props) => props.theme.fonts.bodySemiBold};
-  padding-right: 10px;
 `;
 
 const MainBanner = styled(View)`
@@ -169,6 +146,7 @@ const CompetitionBanner = styled(View)`
   flex-direction: row;
   elevation: 3;
   padding-left: 20px;
+  margin-bottom: 20px;
 `;
 
 const CompetitionImage = styled(Image)`
@@ -200,11 +178,15 @@ const CompetitionButton = styled(TouchableOpacity)`
 `;
 
 export const DashboardScreen = ({ navigation }) => {
-  const { name, avatar, getUser } = useContext(UserContext);
+  const { name, avatar, getUser, offline } = useContext(UserContext);
 
   useEffect(() => {
     getUser();
   }, []);
+
+  const navigate = () => {
+    navigation.navigate("BlogList");
+  };
 
   return (
     <SafeArea>
@@ -217,15 +199,18 @@ export const DashboardScreen = ({ navigation }) => {
           <ProfileContainer style={{ marginTop: 4 }}>
             <View style={{ justifyContent: "center" }}>
               <HeadingText>Welcome Back,</HeadingText>
-              <Name>{name}</Name>
+              <Name>{!offline ? name : "User"}</Name>
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <ProfilePicture source={avatar} />
-            </TouchableOpacity>
+            {!offline ? (
+              <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                <ProfilePicture source={avatar} />
+              </TouchableOpacity>
+            ) : null}
           </ProfileContainer>
 
           <Spacer>
+            {offline ? <Banner navigate={navigate} /> : null}
             <MainBanner>
               <BannerSection>
                 <BannerText>What do you want to learn today ?</BannerText>
@@ -291,6 +276,8 @@ export const DashboardScreen = ({ navigation }) => {
                 </CompetitionButton>
               </View>
             </CompetitionBanner>
+
+            {!offline ? <Banner navigate={navigate} /> : null}
           </Spacer>
         </ScrollView>
       </Container>

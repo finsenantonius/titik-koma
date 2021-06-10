@@ -87,7 +87,7 @@ const MenuTitleText = styled(Text)`
 `;
 
 const MenuSection = styled(View)`
-  height: 180px;
+  height: 120px;
   border-radius: 10px
   background-color: #FFF;
   elevation: 2;
@@ -129,9 +129,7 @@ export const UserProfileScreen = ({ navigation }) => {
             <View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Name>{name}</Name>
-                {/* <MaterialIcons name="verified" style={styles.verified} /> */}
               </View>
-              {/* <Bio>Suka ngoding</Bio> */}
 
               <EditButton onPress={() => navigation.navigate("EditProfile")}>
                 <ButtonText>Edit Profile</ButtonText>
@@ -152,15 +150,15 @@ export const UserProfileScreen = ({ navigation }) => {
                 title="Reward Saya"
                 navigate={() => navigation.navigate("Reward")}
               />
-              <Border />
-              <Menu iconName="people-alt" title="Undang Teman" />
             </MenuSection>
 
             <MenuTitleText>Pusat Bantuan</MenuTitleText>
             <MenuSection>
-              <Menu iconName="help-outline" title="Bantuan" />
-              <Border />
-              <Menu iconName="feedback" title="Feedback" />
+              <Menu
+                iconName="feedback"
+                title="Feedback"
+                navigate={() => navigation.navigate("Feedback")}
+              />
               <Border />
               <Menu
                 iconName="star-border"
@@ -170,7 +168,7 @@ export const UserProfileScreen = ({ navigation }) => {
             </MenuSection>
 
             <MenuTitleText>Pengaturan</MenuTitleText>
-            <MenuSection style={{ height: 120 }}>
+            <MenuSection>
               <Menu
                 iconName="lock"
                 title="Ubah Password"
@@ -186,22 +184,3 @@ export const UserProfileScreen = ({ navigation }) => {
     </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  icon: {
-    color: "black",
-    fontSize: 22,
-    marginRight: 12,
-    alignSelf: "center",
-  },
-  verified: {
-    color: "skyblue",
-    fontSize: 20,
-    marginLeft: 4,
-  },
-  arrow: {
-    color: "black",
-    fontSize: 22,
-    alignSelf: "center",
-  },
-});
