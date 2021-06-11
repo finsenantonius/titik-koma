@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Spacer } from "../components/Spacer";
 import { Banner } from "../components/Banner";
+import { SkeletonImageProfile, SkeletonName } from "../components/Skeleton";
 import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`
@@ -203,7 +204,7 @@ const OfflineText2 = styled(Text)`
 `;
 
 export const DashboardScreen = ({ navigation }) => {
-  const { name, avatar, getUser, offline } = useContext(UserContext);
+  const { name, avatar, getUser, connect, loadUser } = useContext(UserContext);
 
   useEffect(() => {
     getUser();
@@ -218,7 +219,7 @@ export const DashboardScreen = ({ navigation }) => {
       <Container>
         <LogoContainer>
           <Logo>titik koma;</Logo>
-          <OfflineText style={{ display: offline ? "flex" : "none" }}>
+          <OfflineText style={{ display: connect ? "none" : "flex" }}>
             Offline Mode
           </OfflineText>
         </LogoContainer>
@@ -227,27 +228,33 @@ export const DashboardScreen = ({ navigation }) => {
           <ProfileContainer style={{ marginTop: 4 }}>
             <View style={{ justifyContent: "center" }}>
               <HeadingText>Welcome Back,</HeadingText>
-              <Name>{!offline ? name : "User"}</Name>
+              <SkeletonName load={loadUser}>
+                <Name>{connect ? name : "User"}</Name>
+              </SkeletonName>
             </View>
 
-            {!offline ? (
-              <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                <ProfilePicture source={avatar} />
-              </TouchableOpacity>
+            {connect ? (
+              <SkeletonImageProfile load={loadUser}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Profile")}
+                >
+                  <ProfilePicture source={avatar} />
+                </TouchableOpacity>
+              </SkeletonImageProfile>
             ) : null}
           </ProfileContainer>
 
           <Spacer>
-            {offline ? (
-              <Banner navigate={navigate} isOffline={offline} />
+            {!connect ? (
+              <Banner navigate={navigate} isOffline={connect} />
             ) : null}
             <MainBanner>
               <BannerSection>
                 <BannerText>What do you want to learn today ?</BannerText>
                 <Button
-                  disabled={offline ? true : false}
+                  disabled={connect ? false : true}
                   onPress={() => navigation.navigate("ModulList")}
-                  style={{ backgroundColor: offline ? "#ffd994" : "orange" }}
+                  style={{ backgroundColor: connect ? "orange" : "#ffd994" }}
                 >
                   <ButtonText>Get Started</ButtonText>
                 </Button>
@@ -264,7 +271,7 @@ export const DashboardScreen = ({ navigation }) => {
               }}
             >
               <CourseCard1
-                disabled={offline ? true : false}
+                disabled={connect ? false : true}
                 onPress={() => {
                   navigation.navigate("CourseList", {
                     courseName: "Javascript",
@@ -281,7 +288,7 @@ export const DashboardScreen = ({ navigation }) => {
                 </View>
               </CourseCard1>
               <CourseCard3
-                disabled={offline ? true : false}
+                disabled={connect ? false : true}
                 onPress={() => {
                   navigation.navigate("CourseList", {
                     courseName: "React",
@@ -306,8 +313,8 @@ export const DashboardScreen = ({ navigation }) => {
                 <CompetitionText>10-days challenge</CompetitionText>
                 <CompetitionText2>Beginner Level</CompetitionText2>
                 <CompetitionButton
-                  disabled={offline ? true : false}
-                  style={{ backgroundColor: offline ? "#ffd994" : "orange" }}
+                  disabled={connect ? false : true}
+                  style={{ backgroundColor: connect ? "orange" : "#ffd994" }}
                   onPress={() => navigation.navigate("CompetitionList")}
                 >
                   <ButtonText>Join Now</ButtonText>
@@ -315,8 +322,8 @@ export const DashboardScreen = ({ navigation }) => {
               </View>
             </CompetitionBanner>
 
-            {!offline ? (
-              <Banner navigate={navigate} isOffline={offline} />
+            {connect ? (
+              <Banner navigate={navigate} isOffline={connect} />
             ) : null}
           </Spacer>
         </ScrollView>

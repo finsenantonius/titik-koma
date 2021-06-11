@@ -56,7 +56,7 @@ const AuthStack = () => {
 
   setTimeout(() => {
     setIsLoading(false);
-  }, 3000);
+  }, 200);
   if (isLoading) {
     return <SplashScreen />;
   }

@@ -53,6 +53,30 @@ export const SkeletonModul = ({ children, load }) => {
   );
 };
 
+export const SkeletonImageProfile = ({ children, load }) => {
+  return (
+    <SkeletonContent
+      isLoading={load}
+      layout={[{ width: 40, height: 40 }]}
+      containerStyle={styles.image}
+    >
+      {children}
+    </SkeletonContent>
+  );
+};
+
+export const SkeletonName = ({ children, load }) => {
+  return (
+    <SkeletonContent
+      isLoading={load}
+      layout={[{ width: 95, height: 26.3 }]}
+      containerStyle={styles.image}
+    >
+      {children}
+    </SkeletonContent>
+  );
+};
+
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import NetInfo from "@react-native-community/netinfo";
 import URL from "../../api/url";
 import axios from "axios";
 
@@ -13,8 +14,10 @@ export const UserProvider = ({ children }) => {
   const [isRedeemVoucher, setIsRedeemVoucher] = useState("");
   const [credential, setCredential] = useState("");
   const [leaderboard, setLeaderboard] = useState("");
-  const [loadLeaderboard, setLoadLeaderboard] = useState(true);
   const [offline, setOffline] = useState(false);
+
+  const [loadUser, setLoadUser] = useState(true);
+  const [loadLeaderboard, setLoadLeaderboard] = useState(true);
 
   const [onError, setOnError] = useState(false);
   const [alertVoucher, setAlertVoucher] = useState("");
@@ -23,8 +26,13 @@ export const UserProvider = ({ children }) => {
   const [alertFeedback, setAlertFeedback] = useState("");
   const [errorFeedback, setErrorFeedback] = useState("");
 
+  const [connect, setConnect] = useState("");
+
   useEffect(() => {
     getUser();
+    NetInfo.fetch().then((state) => {
+      setConnect(state.isConnected);
+    });
   }, []);
 
   const getUser = async () => {
@@ -40,8 +48,12 @@ export const UserProvider = ({ children }) => {
             setScore(res.data.score);
             setIsRedeemVoucher(res.data.isRedeemVoucher);
             getAvatarImage(res.data.avatar);
+            setLoadUser(false);
           })
-          .catch((err) => setOffline(true));
+          .catch((err) => {
+            setOffline(true);
+            loadUser(false);
+          });
       }
     } catch (e) {
       console.log("kamu ketauan");
@@ -204,7 +216,9 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        loadUser,
         offline,
+        connect,
         name,
         alertPassword,
         onError,

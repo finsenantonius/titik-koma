@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import {
   View,
@@ -6,12 +6,9 @@ import {
   StatusBar,
   FlatList,
   Text,
-  StyleSheet,
+  ScrollView,
 } from "react-native";
-import { Modul } from "../components/Course";
 import { BlogHeader } from "../components/Header";
-import { CourseContext } from "../context/CourseContext";
-import { SkeletonModul } from "../components/Skeleton";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -71,29 +68,31 @@ export const BlogDetailScreen = ({ route, navigation }) => {
   return (
     <SafeArea>
       <BlogHeader navigate={() => navigation.goBack()} title="Blog" />
-      <Container>
-        <Wrapper>
-          <Author>{data.author}</Author>
-          <Symbol> • </Symbol>
-          <DatePublish>{data.datePublish}</DatePublish>
-        </Wrapper>
-        <Title>{data.title}</Title>
-        <Content>
-          My Frameworks are our life. Without them any project is impossible.
-          Frameworks are software that simplify the development process and
-          different modules assembly. The main framework task is to help a
-          developer. The code created in JS frameworks can be used in typical
-          problem solving. Web sites and web apps are built based on it. New
-          frameworks appear once a year or more often. Some years are rich in
-          fresh technologies, but 2020 is not such a fruitful one because of the
-          pandemic. What is more, in the design realm trends arise every couple
-          of months and are picked up by design agencies. As for frontend
-          development, it’s hard for new technologies to become a trend. There
-          are three great JS frameworks with strong IT communities: React, Vue,
-          and Angular. They are not the latest trends in front end development,
-          but really appreciated technologies.
-        </Content>
-      </Container>
+      <ScrollView>
+        <Container>
+          <Wrapper>
+            <Author>{data.author}</Author>
+            <Symbol> • </Symbol>
+            <DatePublish>{data.datePublish}</DatePublish>
+          </Wrapper>
+          <Title>{data.title}</Title>
+          <Content>
+            My Frameworks are our life. Without them any project is impossible.
+            Frameworks are software that simplify the development process and
+            different modules assembly. The main framework task is to help a
+            developer. The code created in JS frameworks can be used in typical
+            problem solving. Web sites and web apps are built based on it. New
+            frameworks appear once a year or more often. Some years are rich in
+            fresh technologies, but 2020 is not such a fruitful one because of
+            the pandemic. What is more, in the design realm trends arise every
+            couple of months and are picked up by design agencies. As for
+            frontend development, it’s hard for new technologies to become a
+            trend. There are three great JS frameworks with strong IT
+            communities: React, Vue, and Angular. They are not the latest trends
+            in front end development, but really appreciated technologies.
+          </Content>
+        </Container>
+      </ScrollView>
     </SafeArea>
   );
 };

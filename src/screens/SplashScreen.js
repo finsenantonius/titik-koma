@@ -6,12 +6,12 @@ const Container = styled(View)`
   flex: 1;
   justify-content: center
   align-items: center;
-  background-color: #0e4a86;
+  background-color: #fff;
 `;
 
 const Logo = styled(Text)`
   font-family: Jakarta-Sans;
-  font-size: 64px;
+  font-size: 50px;
   color: #fff;
   align-self: flex-end;
   letter-spacing: 4px;

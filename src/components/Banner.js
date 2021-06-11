@@ -56,7 +56,7 @@ const BannerImage = styled(Image)`
 export const Banner = ({ navigate, isOffline }) => {
   return (
     <>
-      <BannerHeader style={{ display: isOffline ? "none" : "flex" }}>
+      <BannerHeader style={{ display: isOffline ? "flex" : "none" }}>
         Blog
       </BannerHeader>
       <BlogBanner>
