@@ -53,10 +53,12 @@ const BannerImage = styled(Image)`
   margin-right: 20px;
 `;
 
-export const Banner = ({ navigate }) => {
+export const Banner = ({ navigate, isOffline }) => {
   return (
     <>
-      <BannerHeader>Blog</BannerHeader>
+      <BannerHeader style={{ display: isOffline ? "none" : "flex" }}>
+        Blog
+      </BannerHeader>
       <BlogBanner>
         <BannerImage source={require("../../assets/character3.png")} />
         <View style={{ padding: 16 }}>

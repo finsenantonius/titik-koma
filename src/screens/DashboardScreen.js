@@ -26,6 +26,14 @@ const Container = styled(View)`
   padding-top: 12px;
 `;
 
+const LogoContainer = styled(View)`
+  flex-direction: row;
+  padding-horizontal: 16px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  align-items: center;
+`;
+
 const ProfileContainer = styled(View)`
   flex-direction: row;
   padding-horizontal: 16px;
@@ -81,7 +89,6 @@ const Button = styled(TouchableOpacity)`
   height: 40px;
   width: 80%
   border-radius: 10px;
-  background-color: orange;
   justify-content: center;
   align-items: center
 `;
@@ -172,9 +179,27 @@ const CompetitionButton = styled(TouchableOpacity)`
   height: 35px;
   width: 60%
   border-radius: 10px;
-  background-color: orange;
   justify-content: center;
   align-items: center
+`;
+
+const OfflineContainer = styled(View)`
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const OfflineText = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  font-size: 14px;
+  color: #616161;
+  margin-top: 8px;
+`;
+
+const OfflineText2 = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  font-size: 14px;
+  color: #000;
 `;
 
 export const DashboardScreen = ({ navigation }) => {
@@ -191,9 +216,12 @@ export const DashboardScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Container>
-        <ProfileContainer style={{ marginBottom: 12 }}>
+        <LogoContainer>
           <Logo>titik koma;</Logo>
-        </ProfileContainer>
+          <OfflineText style={{ display: offline ? "flex" : "none" }}>
+            Offline Mode
+          </OfflineText>
+        </LogoContainer>
 
         <ScrollView>
           <ProfileContainer style={{ marginTop: 4 }}>
@@ -210,11 +238,17 @@ export const DashboardScreen = ({ navigation }) => {
           </ProfileContainer>
 
           <Spacer>
-            {offline ? <Banner navigate={navigate} /> : null}
+            {offline ? (
+              <Banner navigate={navigate} isOffline={offline} />
+            ) : null}
             <MainBanner>
               <BannerSection>
                 <BannerText>What do you want to learn today ?</BannerText>
-                <Button onPress={() => navigation.navigate("ModulList")}>
+                <Button
+                  disabled={offline ? true : false}
+                  onPress={() => navigation.navigate("ModulList")}
+                  style={{ backgroundColor: offline ? "#ffd994" : "orange" }}
+                >
                   <ButtonText>Get Started</ButtonText>
                 </Button>
               </BannerSection>
@@ -230,6 +264,7 @@ export const DashboardScreen = ({ navigation }) => {
               }}
             >
               <CourseCard1
+                disabled={offline ? true : false}
                 onPress={() => {
                   navigation.navigate("CourseList", {
                     courseName: "Javascript",
@@ -246,6 +281,7 @@ export const DashboardScreen = ({ navigation }) => {
                 </View>
               </CourseCard1>
               <CourseCard3
+                disabled={offline ? true : false}
                 onPress={() => {
                   navigation.navigate("CourseList", {
                     courseName: "React",
@@ -270,6 +306,8 @@ export const DashboardScreen = ({ navigation }) => {
                 <CompetitionText>10-days challenge</CompetitionText>
                 <CompetitionText2>Beginner Level</CompetitionText2>
                 <CompetitionButton
+                  disabled={offline ? true : false}
+                  style={{ backgroundColor: offline ? "#ffd994" : "orange" }}
                   onPress={() => navigation.navigate("CompetitionList")}
                 >
                   <ButtonText>Join Now</ButtonText>
@@ -277,7 +315,9 @@ export const DashboardScreen = ({ navigation }) => {
               </View>
             </CompetitionBanner>
 
-            {!offline ? <Banner navigate={navigate} /> : null}
+            {!offline ? (
+              <Banner navigate={navigate} isOffline={offline} />
+            ) : null}
           </Spacer>
         </ScrollView>
       </Container>
