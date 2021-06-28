@@ -77,6 +77,18 @@ export const SkeletonName = ({ children, load }) => {
   );
 };
 
+export const SkeletonChallenge = ({ children, load }) => {
+  return (
+    <SkeletonContent
+      isLoading={load}
+      layout={[{ width: "100%", height: 82, marginVertical: 6 }]}
+      containerStyle={styles.challenge}
+    >
+      {children}
+    </SkeletonContent>
+  );
+};
+
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
@@ -88,6 +100,9 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   modul: {
+    marginTop: 8,
+  },
+  challenge: {
     marginTop: 8,
   },
 });

@@ -33,34 +33,52 @@ const QuestionText = styled(Text)`
   margin-bottom: 16px;
 `;
 
-export const Challenge3 = ({ navigation }) => {
+export const Challenge3 = ({ route, navigation }) => {
+  const [optionSelected, setOptionSelected] = useState("");
   const [option1, setOption1] = useState(false);
   const [option2, setOption2] = useState(false);
   const [option3, setOption3] = useState(false);
+  const [option4, setOption4] = useState(false);
+  const { data } = route.params;
 
   const selectA = () => {
     setOption1(true);
     setOption2(false);
     setOption3(false);
+    setOption4(false);
+    setOptionSelected("A");
   };
   const selectB = () => {
     setOption1(false);
     setOption2(true);
     setOption3(false);
+    setOption4(false);
+    setOptionSelected("B");
   };
   const selectC = () => {
     setOption1(false);
     setOption2(false);
     setOption3(true);
+    setOption4(false);
+    setOptionSelected("C");
+  };
+  const selectD = () => {
+    setOption1(false);
+    setOption2(false);
+    setOption3(false);
+    setOption4(true);
+    setOptionSelected("D");
   };
 
   const submit = () => {
-    if (option1 === true) {
+    if (optionSelected === data[2].correctAnswer) {
       AsyncStorage.setItem("@challenge3", "20");
     } else {
       AsyncStorage.setItem("@challenge3", "0");
     }
-    navigation.navigate("Challenge4");
+    navigation.navigate("Challenge4", {
+      data: data,
+    });
   };
 
   return (
@@ -68,24 +86,27 @@ export const Challenge3 = ({ navigation }) => {
       <ChallengeHeader title="Challenge" />
       <Container>
         <HeaderText>3 dari 5</HeaderText>
-        <QuestionText>
-          Bagaimana cara memanggil function yang benar ?
-        </QuestionText>
+        <QuestionText>{data[2].question}</QuestionText>
 
         <Options
-          text={`myFunction()`}
+          text={data[2].answer1}
           isSelected={option1}
           select={() => selectA()}
         />
         <Options
-          text={`call myFunction()`}
+          text={data[2].answer2}
           isSelected={option2}
           select={() => selectB()}
         />
         <Options
-          text={`call function myFunction()`}
+          text={data[2].answer3}
           isSelected={option3}
           select={() => selectC()}
+        />
+        <Options
+          text={data[2].answer4}
+          isSelected={option4}
+          select={() => selectD()}
         />
 
         <Wrapper>

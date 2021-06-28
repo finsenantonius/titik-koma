@@ -52,18 +52,14 @@ const CourseIcon = styled(Image)`
   margin-right: 12px;
 `;
 
-export const ChallengeCard = ({ navigate }) => {
+export const ChallengeCard = ({ data, navigate }) => {
   return (
     <Container onPress={navigate}>
       <Wrapper>
-        <CourseIcon
-          source={{
-            uri: "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
-          }}
-        />
+        <CourseIcon source={{ uri: data.challengeIcon }} />
         <TitleContainer>
-          <CourseName>Javascript</CourseName>
-          <DescriptionText>5 Pertanyaan Dasar Javascript</DescriptionText>
+          <CourseName>{data.challengeName}</CourseName>
+          <DescriptionText>{data.challengeDescription}</DescriptionText>
         </TitleContainer>
       </Wrapper>
       <Arrow name="chevron-right" />

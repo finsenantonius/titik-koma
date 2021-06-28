@@ -33,44 +33,52 @@ const QuestionText = styled(Text)`
   margin-bottom: 16px;
 `;
 
-export const Challenge1 = ({ navigation }) => {
+export const Challenge1 = ({ route, navigation }) => {
+  const [optionSelected, setOptionSelected] = useState("");
   const [option1, setOption1] = useState(false);
   const [option2, setOption2] = useState(false);
   const [option3, setOption3] = useState(false);
   const [option4, setOption4] = useState(false);
+  const { data } = route.params;
 
   const selectA = () => {
     setOption1(true);
     setOption2(false);
     setOption3(false);
     setOption4(false);
+    setOptionSelected("A");
   };
   const selectB = () => {
     setOption1(false);
     setOption2(true);
     setOption3(false);
     setOption4(false);
+    setOptionSelected("B");
   };
   const selectC = () => {
     setOption1(false);
     setOption2(false);
     setOption3(true);
     setOption4(false);
+    setOptionSelected("C");
   };
   const selectD = () => {
     setOption1(false);
     setOption2(false);
     setOption3(false);
     setOption4(true);
+    setOptionSelected("D");
   };
 
   const submit = () => {
-    if (option1 === true) {
+    if (optionSelected === data[0].correctAnswer) {
       AsyncStorage.setItem("@challenge1", "20");
     } else {
       AsyncStorage.setItem("@challenge1", "0");
     }
-    navigation.navigate("Challenge2");
+    navigation.navigate("Challenge2", {
+      data: data,
+    });
   };
 
   return (
@@ -78,27 +86,25 @@ export const Challenge1 = ({ navigation }) => {
       <ChallengeHeader title="Challenge" />
       <Container>
         <HeaderText>1 dari 5</HeaderText>
-        <QuestionText>
-          Bagaimana cara membuat constant yang benar ?
-        </QuestionText>
+        <QuestionText>{data[0].question}</QuestionText>
 
         <Options
-          text={`const i = "Titik Koma"`}
+          text={data[0].answer1}
           isSelected={option1}
           select={() => selectA()}
         />
         <Options
-          text={`const i : "Titik Koma"`}
+          text={data[0].answer2}
           isSelected={option2}
           select={() => selectB()}
         />
         <Options
-          text={`i = "Titik Koma"`}
+          text={data[0].answer3}
           isSelected={option3}
           select={() => selectC()}
         />
         <Options
-          text={`String i = "Titik Koma"`}
+          text={data[0].answer4}
           isSelected={option4}
           select={() => selectD()}
         />

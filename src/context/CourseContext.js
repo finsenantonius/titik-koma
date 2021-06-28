@@ -9,6 +9,8 @@ export const CourseProvider = ({ children }) => {
   const [loadModul, setLoadModul] = useState(true);
   const [course, setCourse] = useState([]);
   const [loadCourse, setloadCourse] = useState(true);
+  const [challenge, setChallenge] = useState([]);
+  const [loadChallenge, setLoadChallenge] = useState(true);
 
   const getAllCourse = () => {
     const url = URL + "/api/course/getAllCourse";
@@ -50,6 +52,20 @@ export const CourseProvider = ({ children }) => {
       });
   };
 
+  const getChallenge = () => {
+    const url = URL + "/api/challenge/getChallenge";
+    axios
+      .get(url)
+      .then((res) => {
+        setChallenge(res.data);
+        setLoadChallenge(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("haha");
+      });
+  };
+
   return (
     <CourseContext.Provider
       value={{
@@ -57,11 +73,14 @@ export const CourseProvider = ({ children }) => {
         loadModul,
         course,
         loadCourse,
+        challenge,
+        loadChallenge,
         getAllCourse,
         getAllModul,
         getCourse,
         setCourse,
         setloadCourse,
+        getChallenge,
       }}
     >
       {children}

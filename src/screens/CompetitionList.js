@@ -7,16 +7,18 @@ import {
   StatusBar,
   Image,
   StyleSheet,
-  Linking,
+  FlatList,
 } from "react-native";
 import { ChallengeCard } from "../components/ChallengeCard";
 import { Header } from "../components/Header";
 import {
   SkeletonLeaderboard,
   SkeletonImageLeaderboard,
+  SkeletonChallenge,
 } from "../components/Skeleton";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { UserContext } from "../context/UserContext";
+import { CourseContext } from "../context/CourseContext";
 
 export const SafeArea = styled(SafeAreaView)`
   ${StatusBar.currentHeight && `padding-top: ${StatusBar.currentHeight}px`};
@@ -93,34 +95,14 @@ const MenuTitleText = styled(Text)`
   color: #0e4a86;
 `;
 
-const MenuSection = styled(View)`
-  height: 180px;
-  border-radius: 10px
-  background-color: #FFF;
-  elevation: 2;
-  margin-bottom: 16px
-`;
-
-const Border = styled(View)`
-  border-bottom-color: whitesmoke;
-  border-width: 0.5px;
-`;
-
-const openPlayStore = () => {
-  const GOOGLE_PACKAGE_NAME = "com.whatsapp";
-  Linking.openURL(`market://details?id=${GOOGLE_PACKAGE_NAME}`);
-};
-
 export const CompetitionListScreen = ({ navigation }) => {
   const { leaderboard, loadLeaderboard, getLeaderboard } =
     useContext(UserContext);
+  const { getChallenge, challenge, loadChallenge } = useContext(CourseContext);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
   useEffect(() => {
+    getChallenge();
     navigation.addListener("focus", () => getLeaderboard());
   }, []);
 
@@ -193,7 +175,25 @@ export const CompetitionListScreen = ({ navigation }) => {
 
         <MenuContainer>
           <MenuTitleText>Competition</MenuTitleText>
-          <ChallengeCard navigate={() => navigation.navigate("Challenge1")} />
+          <SkeletonChallenge load={loadChallenge}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={challenge}
+              keyExtractor={(challenge) => challenge._id}
+              renderItem={({ item }) => {
+                return (
+                  <ChallengeCard
+                    data={item}
+                    navigate={() =>
+                      navigation.navigate("Challenge1", {
+                        data: item.challengeContent,
+                      })
+                    }
+                  />
+                );
+              }}
+            />
+          </SkeletonChallenge>
         </MenuContainer>
       </Container>
     </SafeArea>
