@@ -3,21 +3,16 @@ import styled from "styled-components/native";
 import {
   View,
   Text,
-  Button,
-  TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ScrollView,
   SafeAreaView,
   StatusBar,
   Image,
-  StyleSheet,
   Linking,
 } from "react-native";
 import { LogoutModal } from "../components/Modal";
 import { Menu } from "../components/Menu";
 import { Header } from "../components/Header";
-import { MaterialIcons } from "@expo/vector-icons";
 import { UserContext } from "../context/UserContext";
 
 export const SafeArea = styled(SafeAreaView)`

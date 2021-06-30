@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  StyleSheet,
 } from "react-native";
 import { Header } from "../components/Header";
 import { UserContext } from "../context/UserContext";
@@ -92,8 +91,6 @@ export const EditProfileScreen = ({ navigation }) => {
           value={inputName}
           onChangeText={setInputName}
         />
-        {/* <Label>Bio</Label>
-        <Input placeholder="Masukkan biodata" value="suka ngoding" /> */}
         <Button onPress={() => updateProfile({ inputName, navigate })}>
           <ButtonText>Update Profil</ButtonText>
         </Button>

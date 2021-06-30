@@ -91,12 +91,64 @@ const CourseIcon = styled(Image)`
   align-self: flex-end;
 `;
 
+const CompetitionBanner = styled(View)`
+  height: 120px;
+  background-color: #fbf5ff;
+  border-radius: 10px;
+  flex-direction: row;
+  elevation: 3;
+  padding-left: 20px;
+  margin-bottom: 20px;
+`;
+
+const CompetitionImage = styled(Image)`
+  height: 121px;
+  width: 80px;
+  margin-right: 20px;
+`;
+
+const CompetitionText = styled(Text)`
+  font-size: 20px;
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  color: #305f72;
+`;
+
+const CompetitionText2 = styled(Text)`
+  font-size: 14px;
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  color: #616161;
+  margin-bottom: 4px;
+`;
+
+const CompetitionButton = styled(TouchableOpacity)`
+  height: 35px;
+  width: 60%;
+  background-color: orange
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center
+`;
+
+const ButtonText = styled(Text)`
+  font-size: 16px;
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  color: #fff;
+`;
+
 export const CourseDetailScreen = ({ route, navigation }) => {
-  const { setCourse, setloadCourse } = useContext(CourseContext);
   const video = useRef(null);
   const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
   const { courseName, data } = route.params;
+
+  let videoAssets;
+  if (data.courseTitle === "NodeJS - Introduction") {
+    videoAssets = require("../../assets/video/nodejs1.mp4");
+  } else if (data.courseTitle === "NodeJS - Routing") {
+    videoAssets = require("../../assets/video/nodejs2.mp4");
+  } else {
+    videoAssets = { uri: data.courseFile };
+  }
 
   setTimeout(() => {
     setLoading(false);
@@ -109,7 +161,7 @@ export const CourseDetailScreen = ({ route, navigation }) => {
         <Container>
           <SkeletonVideo load={loading}>
             <Video
-              source={require("../../assets/video/bifest.mp4")}
+              source={videoAssets}
               ref={video}
               style={styles.video}
               useNativeControls
@@ -148,9 +200,21 @@ export const CourseDetailScreen = ({ route, navigation }) => {
 
             <Section>
               <CourseHeader>Challenge</CourseHeader>
-              <ChallengeCard
-                navigate={() => navigation.navigate("Challenge1")}
-              />
+
+              <CompetitionBanner>
+                <CompetitionImage
+                  source={require("../../assets/character2.png")}
+                />
+                <View style={{ padding: 16 }}>
+                  <CompetitionText>10-days challenge</CompetitionText>
+                  <CompetitionText2>Beginner Level</CompetitionText2>
+                  <CompetitionButton
+                    onPress={() => navigation.navigate("CompetitionList")}
+                  >
+                    <ButtonText>Join Now</ButtonText>
+                  </CompetitionButton>
+                </View>
+              </CompetitionBanner>
             </Section>
 
             <Section>

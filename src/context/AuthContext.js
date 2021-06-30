@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     axios
       .post(url, credential)
       .then((response) => {
-        console.log(response);
         try {
           AsyncStorage.setItem("@token", response.data);
           AsyncStorage.setItem("@_credential", JSON.stringify(credential));
@@ -54,8 +53,9 @@ export const AuthProvider = ({ children }) => {
     const url = URL + "/api/user/register";
     const score = 0;
     const avatar = 1;
+    const isRedeemVoucher = false;
     axios
-      .post(url, { name, email, password, score, avatar })
+      .post(url, { name, email, password, score, avatar, isRedeemVoucher })
       .then((response) => {
         console.log(response.data);
         setAlertSuccess(

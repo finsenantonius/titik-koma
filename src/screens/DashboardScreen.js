@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
@@ -120,13 +119,6 @@ const CourseCard1 = styled(TouchableOpacity)`
   padding: 16px;
 `;
 
-const CourseCard2 = styled(TouchableOpacity)`
-  height: 110px;
-  width: 180px;
-  background-color: #fff1ef;
-  border-radius: 10px;
-`;
-
 const CourseCard3 = styled(TouchableOpacity)`
   height: 110px;
   width: 180px;
@@ -184,23 +176,11 @@ const CompetitionButton = styled(TouchableOpacity)`
   align-items: center
 `;
 
-const OfflineContainer = styled(View)`
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-`;
-
 const OfflineText = styled(Text)`
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   font-size: 14px;
   color: #616161;
   margin-top: 8px;
-`;
-
-const OfflineText2 = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.bodySemiBold};
-  font-size: 14px;
-  color: #000;
 `;
 
 export const DashboardScreen = ({ navigation }) => {

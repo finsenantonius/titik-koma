@@ -6,7 +6,6 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
-  StyleSheet,
   FlatList,
 } from "react-native";
 import { ChallengeCard } from "../components/ChallengeCard";
@@ -199,22 +198,3 @@ export const CompetitionListScreen = ({ navigation }) => {
     </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  icon: {
-    color: "black",
-    fontSize: 22,
-    marginRight: 12,
-    alignSelf: "center",
-  },
-  verified: {
-    color: "skyblue",
-    fontSize: 20,
-    marginLeft: 4,
-  },
-  arrow: {
-    color: "black",
-    fontSize: 22,
-    alignSelf: "center",
-  },
-});
