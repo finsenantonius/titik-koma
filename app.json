@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0E4A86"
       },
-      "package": "com.titikkoma.titikkoma"
+      "package": "com.titikkoma.titikkoma",
+      "permissions": ["READ_CONTACTS", "READ_PHONE_STATE", "CAMERA", "RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
