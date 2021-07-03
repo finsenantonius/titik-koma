@@ -113,7 +113,7 @@ const CourseHeader = styled(Text)`
 
 const CourseCard1 = styled(TouchableOpacity)`
   height: 110px;
-  width: 180px;
+  width: 48%;
   background-color: #fff5e5;
   border-radius: 10px;
   padding: 16px;
@@ -121,7 +121,7 @@ const CourseCard1 = styled(TouchableOpacity)`
 
 const CourseCard3 = styled(TouchableOpacity)`
   height: 110px;
-  width: 180px;
+  width: 48%;
   background-color: #eaf9fe;
   border-radius: 10px;
   padding: 16px;
@@ -156,13 +156,13 @@ const CompetitionImage = styled(Image)`
 `;
 
 const CompetitionText = styled(Text)`
-  font-size: 20px;
+  font-size: 18px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   color: #305f72;
 `;
 
 const CompetitionText2 = styled(Text)`
-  font-size: 14px;
+  font-size: 13px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   color: #616161;
   margin-bottom: 4px;
@@ -170,10 +170,10 @@ const CompetitionText2 = styled(Text)`
 
 const CompetitionButton = styled(TouchableOpacity)`
   height: 35px;
-  width: 60%
+  width: 100px;
   border-radius: 10px;
   justify-content: center;
-  align-items: center
+  align-items: center;
 `;
 
 const OfflineText = styled(Text)`
@@ -284,20 +284,20 @@ export const DashboardScreen = ({ navigation }) => {
               </CourseCard3>
             </View>
 
-            <CourseHeader>Challenges</CourseHeader>
+            <CourseHeader>Challenge</CourseHeader>
             <CompetitionBanner>
               <CompetitionImage
                 source={require("../../assets/character2.png")}
               />
               <View style={{ padding: 16 }}>
-                <CompetitionText>10-days challenge</CompetitionText>
+                <CompetitionText>Kuis teknologi</CompetitionText>
                 <CompetitionText2>Beginner Level</CompetitionText2>
                 <CompetitionButton
                   disabled={connect ? false : true}
                   style={{ backgroundColor: connect ? "orange" : "#ffd994" }}
                   onPress={() => navigation.navigate("CompetitionList")}
                 >
-                  <ButtonText>Join Now</ButtonText>
+                  <ButtonText>Gabung</ButtonText>
                 </CompetitionButton>
               </View>
             </CompetitionBanner>

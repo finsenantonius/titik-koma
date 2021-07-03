@@ -28,7 +28,7 @@ export const BlogListScreen = ({ navigation }) => {
       author: "Titik Koma Admin",
       thumbnail:
         "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
-      title: "Belajar pemograman lebih seru dengan aplikasi Titik Koma!",
+      title: "Test Blog List & Detail",
       datePublish: "10 Jun 2021",
     },
   ];

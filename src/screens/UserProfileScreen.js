@@ -62,7 +62,7 @@ const Bio = styled(Text)`
 
 const EditButton = styled(TouchableOpacity)`
   height: 40px;
-  width: 220px
+  width: 150px;
   border-radius: 10px;
   background-color: orange;
   justify-content: center;
@@ -121,8 +121,13 @@ export const UserProfileScreen = ({ navigation }) => {
             >
               <ProfilePicture source={avatar} />
             </TouchableOpacity>
-            <View>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ justifyContent: "space-between" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
                 <Name>{name}</Name>
               </View>
 

@@ -108,13 +108,13 @@ const CompetitionImage = styled(Image)`
 `;
 
 const CompetitionText = styled(Text)`
-  font-size: 20px;
+  font-size: 18px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   color: #305f72;
 `;
 
 const CompetitionText2 = styled(Text)`
-  font-size: 14px;
+  font-size: 13px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   color: #616161;
   margin-bottom: 4px;
@@ -122,7 +122,7 @@ const CompetitionText2 = styled(Text)`
 
 const CompetitionButton = styled(TouchableOpacity)`
   height: 35px;
-  width: 60%;
+  width: 100px;
   background-color: orange
   border-radius: 10px;
   justify-content: center;
@@ -200,18 +200,17 @@ export const CourseDetailScreen = ({ route, navigation }) => {
 
             <Section>
               <CourseHeader>Challenge</CourseHeader>
-
               <CompetitionBanner>
                 <CompetitionImage
                   source={require("../../assets/character2.png")}
                 />
                 <View style={{ padding: 16 }}>
-                  <CompetitionText>10-days challenge</CompetitionText>
+                  <CompetitionText>Kuis teknologi</CompetitionText>
                   <CompetitionText2>Beginner Level</CompetitionText2>
                   <CompetitionButton
                     onPress={() => navigation.navigate("CompetitionList")}
                   >
-                    <ButtonText>Join Now</ButtonText>
+                    <ButtonText>Gabung</ButtonText>
                   </CompetitionButton>
                 </View>
               </CompetitionBanner>

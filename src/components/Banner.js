@@ -20,13 +20,13 @@ const BlogBanner = styled(View)`
 `;
 
 const Text1 = styled(Text)`
-  font-size: 20px;
+  font-size: 18px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   color: #305f72;
 `;
 
 const Text2 = styled(Text)`
-  font-size: 14px;
+  font-size: 13px;
   font-family: ${(props) => props.theme.fonts.bodySemiBold};
   color: #616161;
   margin-bottom: 4px;
@@ -34,11 +34,11 @@ const Text2 = styled(Text)`
 
 const Button = styled(TouchableOpacity)`
   height: 35px;
-  width: 60%
+  width: 100px;
   border-radius: 10px;
   background-color: orange;
   justify-content: center;
-  align-items: center
+  align-items: center;
 `;
 
 const ButtonText = styled(Text)`

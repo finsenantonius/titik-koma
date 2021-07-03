@@ -153,7 +153,7 @@ export const CompetitionListScreen = ({ navigation }) => {
 
   return (
     <SafeArea>
-      <Header navigate={() => navigation.goBack()} title="Competition" />
+      <Header navigate={() => navigation.goBack()} title="Challenge" />
       <Container>
         <LeaderboardContainer>
           <ProfileContainer>
@@ -173,7 +173,7 @@ export const CompetitionListScreen = ({ navigation }) => {
         </LeaderboardContainer>
 
         <MenuContainer>
-          <MenuTitleText>Competition</MenuTitleText>
+          <MenuTitleText>Challenge</MenuTitleText>
           <SkeletonChallenge load={loadChallenge}>
             <FlatList
               showsVerticalScrollIndicator={false}

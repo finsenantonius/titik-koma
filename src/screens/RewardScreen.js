@@ -67,11 +67,11 @@ export const RewardScreen = ({ navigation }) => {
             <Wrapper>
               <CourseIcon
                 source={{
-                  uri: "https://titik-koma-assets.herokuapp.com/image/ff29af7f13d19f908f5964f49e375107.png",
+                  uri: "https://titik-koma-assets.herokuapp.com/image/1da8be7dea581b0bf0f666bc2bdb165c.png",
                 }}
               />
               <TitleContainer>
-                <CourseName>React 2021</CourseName>
+                <CourseName>NodeJS - Routing</CourseName>
               </TitleContainer>
             </Wrapper>
           </Card>

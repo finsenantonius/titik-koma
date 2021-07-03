@@ -76,21 +76,52 @@ export const BlogDetailScreen = ({ route, navigation }) => {
             <DatePublish>{data.datePublish}</DatePublish>
           </Wrapper>
           <Title>{data.title}</Title>
+          <Content>1. Titik Koma mobile app for user</Content>
+          <Content>2. Titik Koma website for admin</Content>
+          <Content></Content>
+          <Content>Titik Koma dev test script:</Content>
+
+          <Content>- Test login (success)</Content>
+          <Content>- Test register (success)</Content>
+          <Content>- Test logout (success)</Content>
+          <Content>- Test change avatar pic (success)</Content>
+          <Content>- Test change name (success)</Content>
+          <Content>- Test change password (success)</Content>
+          <Content>- Test voucher code: TITIKKOMA2021 (success)</Content>
+          <Content>- Test submit feedback (success)</Content>
+          <Content>- Test rate app: redirect to play store (success)</Content>
+          <Content>- Test reward (success)</Content>
+          <Content>- Test course list (success)</Content>
+          <Content>- Test course detail (success)</Content>
+          <Content>- Test leaderboard logic (success)</Content>
+          <Content>- Test leaderboard (success)</Content>
+          <Content>- Test challenge (success)</Content>
+          <Content>- Test blog detail (success)</Content>
+          <Content>- Test offline mode: (success)</Content>
+          <Content>1. close app</Content>
+          <Content>2. turn off wifi / data celular</Content>
+          <Content>3. open app</Content>
+          <Content></Content>
+          <Content></Content>
+          <Content>User Interface & User Experience: </Content>
+          <Content>- Test navigation (success)</Content>
+          <Content>- Test skeleton loading dashboard (success)</Content>
+          <Content>- Test skeleton loading course (success)</Content>
           <Content>
-            My Frameworks are our life. Without them any project is impossible.
-            Frameworks are software that simplify the development process and
-            different modules assembly. The main framework task is to help a
-            developer. The code created in JS frameworks can be used in typical
-            problem solving. Web sites and web apps are built based on it. New
-            frameworks appear once a year or more often. Some years are rich in
-            fresh technologies, but 2020 is not such a fruitful one because of
-            the pandemic. What is more, in the design realm trends arise every
-            couple of months and are picked up by design agencies. As for
-            frontend development, it’s hard for new technologies to become a
-            trend. There are three great JS frameworks with strong IT
-            communities: React, Vue, and Angular. They are not the latest trends
-            in front end development, but really appreciated technologies.
+            - Test skeleton loading leaderboard & challenge (success)
           </Content>
+          <Content>- Test alert invalid password login (success)</Content>
+          <Content>- Test modal pop-up logout (success)</Content>
+          <Content>- Test alert success redeem voucher code (success)</Content>
+          <Content>- Test alert invalid voucher code (success)</Content>
+          <Content>- Test alert already redeem voucher code (success)</Content>
+          <Content>- Test unlock course after redeem voucher (success)</Content>
+          <Content>- Test alert change password (success)</Content>
+          <Content>- Test splash screen (success)</Content>
+          <Content>- Test app icon (success)</Content>
+          <Content></Content>
+          <Content>developed by finsen for thesis purpose</Content>
+          <Content>7 Apr - 3 Jul 2021</Content>
         </Container>
       </ScrollView>
     </SafeArea>

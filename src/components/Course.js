@@ -63,7 +63,7 @@ export const Modul = ({ data, navigate }) => {
 
 export const Course = ({ data, navigate, isRedeemVoucher }) => {
   let disable = false;
-  if (data.courseName === "React" && !isRedeemVoucher) {
+  if (data.courseTitle === "NodeJS - Routing" && !isRedeemVoucher) {
     disable = true;
   }
 
