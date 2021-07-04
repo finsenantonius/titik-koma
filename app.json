@@ -2,7 +2,7 @@
   "expo": {
     "name": "Titik Koma",
     "slug": "titik-koma",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -25,7 +25,8 @@
         "backgroundColor": "#0E4A86"
       },
       "package": "com.titikkoma.titikkoma",
-      "permissions": ["CAMERA", "READ_CONTACTS", "READ_PHONE_STATE", "RECORD_AUDIO"]
+      "permissions": ["CAMERA", "READ_CONTACTS", "READ_PHONE_STATE", "RECORD_AUDIO"],
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
