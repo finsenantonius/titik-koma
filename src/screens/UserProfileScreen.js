@@ -95,7 +95,7 @@ const Border = styled(View)`
 `;
 
 const openPlayStore = () => {
-  const GOOGLE_PACKAGE_NAME = "com.whatsapp";
+  const GOOGLE_PACKAGE_NAME = "com.titikkoma.titikkoma";
   Linking.openURL(`market://details?id=${GOOGLE_PACKAGE_NAME}`);
 };
 

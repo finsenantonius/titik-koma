@@ -50,7 +50,7 @@ const ButtonText = styled(Text)`
 const BannerImage = styled(Image)`
   height: 121px;
   width: 80px;
-  margin-right: 20px;
+  margin-right: 10px;
 `;
 
 export const Banner = ({ navigate, isOffline }) => {

@@ -101,7 +101,7 @@ const ButtonText = styled(Text)`
 
 const BannerImage = styled(Image)`
   height: 100%;
-  width: 150px;
+  width: 130px;
 `;
 
 const CourseHeader = styled(Text)`
@@ -152,7 +152,7 @@ const CompetitionBanner = styled(View)`
 const CompetitionImage = styled(Image)`
   height: 121px;
   width: 80px;
-  margin-right: 20px;
+  margin-right: 10px;
 `;
 
 const CompetitionText = styled(Text)`
