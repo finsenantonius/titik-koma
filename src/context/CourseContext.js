@@ -16,7 +16,7 @@ export const CourseProvider = ({ children }) => {
   const [loadNews, setLoadNews] = useState(true);
 
   const getAllNews = () => {
-    const url = URL + "/api/news/getAllNews";
+    const url = URL + "/api/news/getAllNewss";
     axios
       .get(url)
       .then((res) => {
@@ -30,9 +30,13 @@ export const CourseProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
-        const offlineNews = AsyncStorage.getItem("@tk_news");
-        setNews(JSON.parse(offlineNews));
-        setLoadNews(false);
+        try {
+          const offlineNews = AsyncStorage.getItem("@tk_news");
+          setNews(JSON.parse(offlineNews));
+          setLoadNews(false);
+        } catch (e) {
+          setLoadNews(false);
+        }
       });
   };
 

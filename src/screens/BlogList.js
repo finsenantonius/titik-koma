@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import styled from "styled-components/native";
-import { View, SafeAreaView, StatusBar, FlatList } from "react-native";
+import { View, SafeAreaView, StatusBar, FlatList, Text } from "react-native";
 import { BlogCard } from "../components/Card";
 import { BlogHeader } from "../components/Header";
 import { CourseContext } from "../context/CourseContext";
@@ -16,6 +16,13 @@ export const SafeArea = styled(SafeAreaView)`
 const Container = styled(View)`
   flex: 1;
   background-color: #fff;
+`;
+
+const NoBlogs = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  font-size: 16px;
+  color: #0e4a86;
+  margin-top: 16px;
 `;
 
 export const BlogListScreen = ({ navigation }) => {
@@ -46,6 +53,11 @@ export const BlogListScreen = ({ navigation }) => {
               return <BlogCard data={item} navigate={() => navigate(item)} />;
             }}
           />
+          {news.length === 0 ? (
+            <View style={{ alignItems: "center" }}>
+              <NoBlogs>blog belum tersedia saat ini.</NoBlogs>
+            </View>
+          ) : null}
         </SkeletonNews>
       </Container>
     </SafeArea>
