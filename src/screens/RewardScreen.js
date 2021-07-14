@@ -1,6 +1,13 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { View, Text, SafeAreaView, Image, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
 import { Header } from "../components/Header";
 import { UserContext } from "../context/UserContext";
 
@@ -24,7 +31,7 @@ const NoReward = styled(Text)`
   margin-bottom: 16px;
 `;
 
-const Card = styled(View)`
+const Card = styled(TouchableOpacity)`
   height: 82px;
   width: 100%;
   border-radius: 10px;
@@ -63,7 +70,11 @@ export const RewardScreen = ({ navigation }) => {
       <Header navigate={() => navigation.goBack()} title="Reward" />
       <Container>
         {isRedeemVoucher ? (
-          <Card>
+          <Card
+            onPress={() =>
+              navigation.navigate("CourseList", { courseName: "Node JS" })
+            }
+          >
             <Wrapper>
               <CourseIcon
                 source={{
