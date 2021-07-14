@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import URL from "../../api/url";
 import axios from "axios";
 
@@ -11,6 +12,29 @@ export const CourseProvider = ({ children }) => {
   const [loadCourse, setloadCourse] = useState(true);
   const [challenge, setChallenge] = useState([]);
   const [loadChallenge, setLoadChallenge] = useState(true);
+  const [news, setNews] = useState([]);
+  const [loadNews, setLoadNews] = useState(true);
+
+  const getAllNews = () => {
+    const url = URL + "/api/news/getAllNews";
+    axios
+      .get(url)
+      .then((res) => {
+        setNews(res.data);
+        setLoadNews(false);
+        try {
+          AsyncStorage.setItem("@tk_news", JSON.stringify(res.data));
+        } catch (e) {
+          console.log(e);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        const offlineNews = AsyncStorage.getItem("@tk_news");
+        setNews(JSON.parse(offlineNews));
+        setLoadNews(false);
+      });
+  };
 
   const getAllCourse = () => {
     const url = URL + "/api/course/getAllCourse";
@@ -75,8 +99,11 @@ export const CourseProvider = ({ children }) => {
         loadCourse,
         challenge,
         loadChallenge,
+        news,
+        loadNews,
         getAllCourse,
         getAllModul,
+        getAllNews,
         getCourse,
         setCourse,
         setloadCourse,

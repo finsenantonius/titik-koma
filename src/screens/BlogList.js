@@ -4,6 +4,8 @@ import { View, SafeAreaView, StatusBar, FlatList } from "react-native";
 import { BlogCard } from "../components/Card";
 import { BlogHeader } from "../components/Header";
 import { CourseContext } from "../context/CourseContext";
+import { UserContext } from "../context/UserContext";
+import { SkeletonNews } from "../components/Skeleton";
 
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -17,34 +19,34 @@ const Container = styled(View)`
 `;
 
 export const BlogListScreen = ({ navigation }) => {
-  const navigate = (courseData) => {
+  const { getAllNews, news, loadNews } = useContext(CourseContext);
+  const { connect } = useContext(UserContext);
+
+  console.log(connect);
+  const navigate = (newsData) => {
     navigation.navigate("BlogDetail", {
-      data: courseData,
+      data: newsData,
     });
   };
 
-  const data = [
-    {
-      author: "Titik Koma Admin",
-      thumbnail:
-        "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
-      title: "Test Blog List & Detail",
-      datePublish: "10 Jun 2021",
-    },
-  ];
+  useEffect(() => {
+    getAllNews();
+  }, []);
 
   return (
     <SafeArea>
       <BlogHeader navigate={() => navigation.goBack()} title="Blog" />
       <Container>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={data}
-          keyExtractor={(data) => data.title}
-          renderItem={({ item }) => {
-            return <BlogCard data={item} navigate={() => navigate(item)} />;
-          }}
-        />
+        <SkeletonNews load={loadNews}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={news}
+            keyExtractor={(news) => news.newsTitle}
+            renderItem={({ item }) => {
+              return <BlogCard data={item} navigate={() => navigate(item)} />;
+            }}
+          />
+        </SkeletonNews>
       </Container>
     </SafeArea>
   );

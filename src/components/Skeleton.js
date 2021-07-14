@@ -89,6 +89,18 @@ export const SkeletonChallenge = ({ children, load }) => {
   );
 };
 
+export const SkeletonNews = ({ children, load }) => {
+  return (
+    <SkeletonContent
+      isLoading={load}
+      layout={[{ width: "100%", height: 125 }]}
+      containerStyle={styles.news}
+    >
+      {children}
+    </SkeletonContent>
+  );
+};
+
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
@@ -104,5 +116,8 @@ const styles = StyleSheet.create({
   },
   challenge: {
     marginTop: 8,
+  },
+  news: {
+    margin: 0,
   },
 });

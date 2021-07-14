@@ -101,7 +101,7 @@ const ButtonText = styled(Text)`
 
 const BannerImage = styled(Image)`
   height: 100%;
-  width: 130px;
+  width: 144px;
 `;
 
 const CourseHeader = styled(Text)`

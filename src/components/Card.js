@@ -46,14 +46,14 @@ const DatePublish = styled(Text)`
 export const BlogCard = ({ data, navigate }) => {
   return (
     <CardContainer onPress={navigate}>
-      <Author>{data.author}</Author>
+      <Author>{data.newsAuthor}</Author>
       <Wrapper>
         <TitleContainer>
-          <Title>{data.title}</Title>
+          <Title>{data.newsTitle}</Title>
         </TitleContainer>
-        <Thumbnail source={{ uri: data.thumbnail }} />
+        <Thumbnail source={{ uri: data.newsThumbnail }} />
       </Wrapper>
-      <DatePublish>{data.datePublish}</DatePublish>
+      <DatePublish>{data.newsUploadDate}</DatePublish>
     </CardContainer>
   );
 };
