@@ -31,7 +31,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     getUser();
     NetInfo.fetch().then((state) => {
-      setConnect(false);
+      setConnect(state.isConnected);
     });
   }, []);
 

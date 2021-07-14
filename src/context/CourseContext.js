@@ -16,7 +16,7 @@ export const CourseProvider = ({ children }) => {
   const [loadNews, setLoadNews] = useState(true);
 
   const getAllNews = () => {
-    const url = URL + "/api/news/getAllNewss";
+    const url = URL + "/api/news/getAllNews";
     axios
       .get(url)
       .then((res) => {
