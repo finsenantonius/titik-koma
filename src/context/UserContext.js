@@ -26,6 +26,8 @@ export const UserProvider = ({ children }) => {
   const [alertFeedback, setAlertFeedback] = useState("");
   const [errorFeedback, setErrorFeedback] = useState("");
 
+  const [showNotificaton, setShowNotificaton] = useState(false);
+
   const [connect, setConnect] = useState("");
 
   useEffect(() => {
@@ -101,6 +103,7 @@ export const UserProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data);
         signIn({ navigate });
+        setShowNotificaton(true);
       })
       .catch((err) => {
         console.log(err);
@@ -230,6 +233,7 @@ export const UserProvider = ({ children }) => {
         voucherError,
         alertFeedback,
         errorFeedback,
+        showNotificaton,
         updateProfile,
         getCredential,
         getUser,
@@ -244,6 +248,7 @@ export const UserProvider = ({ children }) => {
         sendFeedback,
         setAlertFeedback,
         setErrorFeedback,
+        setShowNotificaton,
       }}
     >
       {children}

@@ -94,13 +94,28 @@ const Border = styled(View)`
   border-width: 0.5px;
 `;
 
+const NotificationBar = styled(View)`
+  height: 40px;
+  background-color: #f2fcf4;
+  display: flex;
+  justify-content: center
+  padding-horizontal: 16px;
+`;
+
+const Text1 = styled(Text)`
+  font-size: 16px;
+  font-family: ${(props) => props.theme.fonts.bodySemiBold};
+  color: #305f72;
+`;
+
 const openPlayStore = () => {
   const GOOGLE_PACKAGE_NAME = "com.titikkoma.titikkoma";
   Linking.openURL(`market://details?id=${GOOGLE_PACKAGE_NAME}`);
 };
 
 export const UserProfileScreen = ({ navigation }) => {
-  const { name, avatar, getUser } = useContext(UserContext);
+  const { name, avatar, getUser, showNotificaton, setShowNotificaton } =
+    useContext(UserContext);
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -110,11 +125,22 @@ export const UserProfileScreen = ({ navigation }) => {
     navigation.addListener("focus", () => getUser());
   }, []);
 
+  if (showNotificaton === true) {
+    setTimeout(() => {
+      setShowNotificaton(false);
+    }, 4000);
+  }
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Profile" />
       <ScrollView>
         <Container>
+          <NotificationBar
+            style={{ display: showNotificaton ? "flex" : "none" }}
+          >
+            <Text1>berhasil merubah nama.</Text1>
+          </NotificationBar>
           <ProfileContainer>
             <TouchableOpacity
               onPress={() => navigation.navigate("ChangePhoto")}

@@ -26,6 +26,9 @@ import {
 import { theme } from "./src/theme";
 import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
+import { ForgotPasswordScreen } from "./src/screens/ForgotPasswordScreen";
+import { OtpScreen } from "./src/screens/OtpScreen";
+import { ResetPasswordScreen } from "./src/screens/ResetPassword";
 import { DashboardScreen } from "./src/screens/DashboardScreen";
 import { UserProfileScreen } from "./src/screens/UserProfileScreen";
 import { VoucherScreen } from "./src/screens/VoucherScreen";
@@ -94,6 +97,12 @@ const AuthStack = () => {
         <>
           <Stack.Screen name="Signin" component={SigninScreen} />
           <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswordScreen}
+          />
+          <Stack.Screen name="OTP" component={OtpScreen} />
+          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
         </>
       )}
     </Stack.Navigator>

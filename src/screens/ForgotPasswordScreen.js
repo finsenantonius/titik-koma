@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../context/AuthContext";
 import styled from "styled-components/native";
 import {
@@ -81,10 +82,14 @@ const AlertText = styled(Text)`
   color: red
 `;
 
-export const SigninScreen = ({ navigation }) => {
-  const { signIn, alert, clearAlert } = useContext(AuthContext);
+const AlertSuccess = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.bodySemiBold}
+  color: green
+`;
+
+export const ForgotPasswordScreen = ({ navigation }) => {
+  const { ForgotPassword, alertEmail, clearAlert } = useContext(AuthContext);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -93,6 +98,18 @@ export const SigninScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
+  const submitForgotPassword = ({ email, navigate }) => {
+    let otp = (Math.floor(Math.random() * 10000) + 10000)
+      .toString()
+      .substring(1);
+
+    ForgotPassword({ email, otp, navigate });
+  };
+
+  const navigate = () => {
+    navigation.navigate("OTP");
+  };
+
   return (
     <KeyboardAvoidingView>
       <ContentContainer>
@@ -100,8 +117,7 @@ export const SigninScreen = ({ navigation }) => {
           <Container>
             <Spacer>
               <HeaderContainer>
-                <HeaderText>Hallo!</HeaderText>
-                <HeaderText>Selamat datang</HeaderText>
+                <HeaderText>Lupa Password</HeaderText>
               </HeaderContainer>
               <Input
                 autoCapitalize="none"
@@ -111,30 +127,10 @@ export const SigninScreen = ({ navigation }) => {
                 value={email}
                 onChangeText={setEmail}
               />
-              <Input
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Password"
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-              />
-              {alert ? <AlertText>{alert}</AlertText> : null}
-              <Button onPress={() => signIn({ email, password })}>
-                <ButtonText>Masuk</ButtonText>
+              {alertEmail ? <AlertText>{alertEmail}</AlertText> : null}
+              <Button onPress={() => submitForgotPassword({ email, navigate })}>
+                <ButtonText>Kirim OTP</ButtonText>
               </Button>
-
-              <NavContainer>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("ForgotPassword")}
-                >
-                  <NavLink>Lupa Password</NavLink>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-                  <NavLink>Daftar</NavLink>
-                </TouchableOpacity>
-              </NavContainer>
             </Spacer>
           </Container>
         </SafeArea>

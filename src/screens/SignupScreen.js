@@ -106,7 +106,7 @@ export const SignupScreen = ({ navigation }) => {
             <Spacer>
               <HeaderContainer>
                 <HeaderText>Hallo!</HeaderText>
-                <HeaderText>Sign up to get started</HeaderText>
+                <HeaderText>Daftar di Titik Koma</HeaderText>
                 {/* <HeaderText>get started</HeaderText> */}
               </HeaderContainer>
               <Input

@@ -10,9 +10,19 @@ export const AuthProvider = ({ children }) => {
   const [alert, setAlert] = useState("");
   const [alertSuccess, setAlertSuccess] = useState("");
 
+  const [alertEmail, setAlertEmail] = useState("");
+  const [alertOTP, setAlertOTP] = useState("");
+  const [otpEmail, setOtpEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [onError, setOnError] = useState(false);
+  const [alertPassword, setAlertPassword] = useState("");
+  const [endProcess, setEndProcess] = useState(false);
+
   const clearAlert = () => {
     setAlert("");
     setAlertSuccess("");
+    setAlertEmail("");
+    setAlertOTP("");
   };
 
   useEffect(() => {
@@ -74,16 +84,73 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
   };
 
+  const ForgotPassword = ({ email, otp, navigate }) => {
+    const url = URL + "/api/user/sendEmail";
+    const data = {
+      userEmail: email,
+      otp: otp,
+    };
+    console.log(data);
+    axios
+      .post(url, data)
+      .then((res) => {
+        console.log("sukses email");
+        setAlertOTP("Kode OTP sudah dikirimkan ke email Anda.");
+        setAlertEmail("");
+        setOtpEmail(otp);
+        setUserEmail(email);
+        navigate();
+      })
+      .catch((err) => {
+        console.log(err);
+        setAlertEmail("Akun tidak terdaftar.");
+        setAlertOTP("");
+      });
+  };
+
+  const resetPassword = ({ newPassword, confPassword }) => {
+    const url = URL + "/api/user/resetPassword";
+    if (newPassword === confPassword) {
+      const data = {
+        userEmail: userEmail,
+        newPassword: newPassword,
+      };
+      axios
+        .patch(url, data)
+        .then((res) => {
+          setAlertPassword("Berhasil merubah password!");
+          setOnError(false);
+          setEndProcess(true);
+        })
+        .catch((err) => {
+          setAlertPassword("Terjadi Kesalahan");
+          setOnError(false);
+        });
+    } else {
+      setAlertPassword("Password baru tidak sesuai!");
+      setOnError(true);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
         alert,
         alertSuccess,
+        alertEmail,
+        alertOTP,
+        otpEmail,
+        userEmail,
+        alertPassword,
+        onError,
+        endProcess,
         signUp,
         signIn,
         removeToken,
         clearAlert,
+        ForgotPassword,
+        resetPassword,
       }}
     >
       {children}
