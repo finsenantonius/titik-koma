@@ -141,6 +141,15 @@ export const CourseDetailScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(true);
   const { courseName, data } = route.params;
 
+  let videoAssets;
+  if (data.courseTitle === "NodeJS - Introduction") {
+    videoAssets = require("../../assets/video/nodejs1.mp4");
+  } else if (data.courseTitle === "NodeJS - Routing") {
+    videoAssets = require("../../assets/video/nodejs2.mp4");
+  } else {
+    videoAssets = { uri: data.courseFile };
+  }
+
   setTimeout(() => {
     setLoading(false);
   }, 2000);
@@ -152,7 +161,7 @@ export const CourseDetailScreen = ({ route, navigation }) => {
         <Container>
           <SkeletonVideo load={loading}>
             <Video
-              source={data.courseFile}
+              source={videoAssets}
               ref={video}
               style={styles.video}
               useNativeControls
@@ -205,45 +214,6 @@ export const CourseDetailScreen = ({ route, navigation }) => {
                   </CompetitionButton>
                 </View>
               </CompetitionBanner>
-            </Section>
-
-            <Section>
-              <CourseHeader>Kelas Terkait</CourseHeader>
-              {courseName === "Javascript" ? (
-                <CourseCard3
-                  key={data.courseName}
-                  onPress={() => {
-                    navigation.navigate("CourseList", {
-                      courseName: "React",
-                    });
-                  }}
-                >
-                  <CourseName>React</CourseName>
-                  <CourseIcon
-                    source={{
-                      uri: "https://titik-koma-assets.herokuapp.com/image/ff29af7f13d19f908f5964f49e375107.png",
-                    }}
-                  />
-                </CourseCard3>
-              ) : (
-                <CourseCard1
-                  key={data.courseName}
-                  onPress={() => {
-                    navigation.navigate("CourseList", {
-                      courseName: "Javascript",
-                    });
-                  }}
-                >
-                  <CourseName>Javascript</CourseName>
-                  <View>
-                    <CourseIcon
-                      source={{
-                        uri: "https://titik-koma-assets.herokuapp.com/image/a74bf0b2d12af5eef735dcad0765f1de.png",
-                      }}
-                    />
-                  </View>
-                </CourseCard1>
-              )}
             </Section>
           </ContentContainer>
         </Container>
