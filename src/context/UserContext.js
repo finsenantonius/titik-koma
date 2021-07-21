@@ -58,7 +58,7 @@ export const UserProvider = ({ children }) => {
           });
       }
     } catch (e) {
-      console.log("kamu ketauan");
+      console.log(e);
     }
   };
 

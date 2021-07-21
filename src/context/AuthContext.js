@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
           setIsLoggedIn(true);
         }
       } catch (e) {
-        console.log("kamu ketauan");
+        console.log(e);
       }
     };
     getToken();

@@ -49,7 +49,6 @@ export const CourseProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log("haha");
       });
   };
 
@@ -76,7 +75,6 @@ export const CourseProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log("haha");
       });
   };
 
@@ -90,7 +88,6 @@ export const CourseProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log("haha");
       });
   };
 
