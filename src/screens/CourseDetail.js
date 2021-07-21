@@ -141,15 +141,6 @@ export const CourseDetailScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(true);
   const { courseName, data } = route.params;
 
-  let videoAssets;
-  if (data.courseTitle === "NodeJS - Introduction") {
-    videoAssets = require("../../assets/video/nodejs1.mp4");
-  } else if (data.courseTitle === "NodeJS - Routing") {
-    videoAssets = require("../../assets/video/nodejs2.mp4");
-  } else {
-    videoAssets = { uri: data.courseFile };
-  }
-
   setTimeout(() => {
     setLoading(false);
   }, 2000);
@@ -161,7 +152,7 @@ export const CourseDetailScreen = ({ route, navigation }) => {
         <Container>
           <SkeletonVideo load={loading}>
             <Video
-              source={videoAssets}
+              source={data.courseFile}
               ref={video}
               style={styles.video}
               useNativeControls
