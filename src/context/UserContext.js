@@ -15,6 +15,8 @@ export const UserProvider = ({ children }) => {
   const [credential, setCredential] = useState("");
   const [leaderboard, setLeaderboard] = useState("");
   const [offline, setOffline] = useState(false);
+  const [voucherCode, setVoucherCode] = useState("");
+  const [reward, setReward] = useState("");
 
   const [loadUser, setLoadUser] = useState(true);
   const [loadLeaderboard, setLoadLeaderboard] = useState(true);
@@ -216,6 +218,30 @@ export const UserProvider = ({ children }) => {
       });
   };
 
+  const getVoucherCode = () => {
+    const url = URL + "/api/voucher/getAllVoucher";
+    axios
+      .get(url)
+      .then((res) => {
+        setVoucherCode(res.data[0].voucherCode);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getReward = () => {
+    const url = URL + "/api/reward/getAllReward";
+    axios
+      .get(url)
+      .then((res) => {
+        setReward(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -234,6 +260,8 @@ export const UserProvider = ({ children }) => {
         alertFeedback,
         errorFeedback,
         showNotificaton,
+        voucherCode,
+        reward,
         updateProfile,
         getCredential,
         getUser,
@@ -249,6 +277,8 @@ export const UserProvider = ({ children }) => {
         setAlertFeedback,
         setErrorFeedback,
         setShowNotificaton,
+        getVoucherCode,
+        getReward,
       }}
     >
       {children}

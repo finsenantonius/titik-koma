@@ -78,6 +78,8 @@ export const VoucherScreen = ({ navigation }) => {
     getCredential,
     isRedeemVoucher,
     setVoucherError,
+    getVoucherCode,
+    voucherCode,
   } = useContext(UserContext);
   const [usedVoucher, setUsedVoucher] = useState("");
   const [voucher, setVoucher] = useState("");
@@ -85,6 +87,7 @@ export const VoucherScreen = ({ navigation }) => {
 
   useEffect(() => {
     getCredential();
+    getVoucherCode();
     navigation.addListener("focus", () => {
       setAlertVoucher("");
       setVoucherError("");
@@ -96,10 +99,10 @@ export const VoucherScreen = ({ navigation }) => {
   };
 
   const submitVoucher = () => {
-    if (isRedeemVoucher === true && voucher === "TITIKKOMA2021") {
+    if (isRedeemVoucher === true && voucher === voucherCode) {
       setUsedVoucher("Kode voucher sudah digunakan.");
       setErrorVoucher("");
-    } else if (voucher === "TITIKKOMA2021") {
+    } else if (voucher === voucherCode) {
       redeemVoucher({ isRedeemVoucher: true, navigate });
       setErrorVoucher("");
     } else {

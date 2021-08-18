@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components/native";
 import {
   View,
@@ -64,7 +64,12 @@ const CourseIcon = styled(Image)`
 `;
 
 export const RewardScreen = ({ navigation }) => {
-  const { isRedeemVoucher } = useContext(UserContext);
+  const { isRedeemVoucher, getReward, reward } = useContext(UserContext);
+
+  useEffect(() => {
+    getReward();
+  }, []);
+
   return (
     <SafeArea>
       <Header navigate={() => navigation.goBack()} title="Reward" />
@@ -72,17 +77,19 @@ export const RewardScreen = ({ navigation }) => {
         {isRedeemVoucher ? (
           <Card
             onPress={() =>
-              navigation.navigate("CourseList", { courseName: "Node JS" })
+              navigation.navigate("CourseList", {
+                courseName: reward.modulName,
+              })
             }
           >
             <Wrapper>
               <CourseIcon
                 source={{
-                  uri: "https://titik-koma-assets.herokuapp.com/image/1da8be7dea581b0bf0f666bc2bdb165c.png",
+                  uri: reward.rewardThumbnail,
                 }}
               />
               <TitleContainer>
-                <CourseName>NodeJS - Routing</CourseName>
+                <CourseName>{reward.rewardName}</CourseName>
               </TitleContainer>
             </Wrapper>
           </Card>
