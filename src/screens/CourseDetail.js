@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
+import * as ScreenOrientation from "expo-screen-orientation";
 import { Video } from "expo-av";
 import styled from "styled-components/native";
 import {
@@ -12,8 +13,6 @@ import {
   Image,
 } from "react-native";
 import { Header } from "../components/Header";
-import { CourseContext } from "../context/CourseContext";
-import { ChallengeCard } from "../components/ChallengeCard";
 import { SkeletonVideo } from "../components/Skeleton";
 
 export const SafeArea = styled(SafeAreaView)`
@@ -61,34 +60,6 @@ const TableText = styled(Text)`
   font-size: 14px
   font-family: ${(props) => props.theme.fonts.body};
   color: black;
-`;
-
-const CourseCard1 = styled(TouchableOpacity)`
-  height: 110px;
-  width: 180px;
-  background-color: #fff5e5;
-  border-radius: 10px;
-  padding: 16px;
-`;
-
-const CourseCard3 = styled(TouchableOpacity)`
-  height: 110px;
-  width: 180px;
-  background-color: #eaf9fe;
-  border-radius: 10px;
-  padding: 16px;
-`;
-
-const CourseName = styled(Text)`
-  font-size: 18px;
-  font-family: ${(props) => props.theme.fonts.body};
-  color: #305f72;
-`;
-
-const CourseIcon = styled(Image)`
-  height: 50px;
-  width: 50px;
-  align-self: flex-end;
 `;
 
 const CompetitionBanner = styled(View)`
@@ -139,6 +110,7 @@ export const CourseDetailScreen = ({ route, navigation }) => {
   const video = useRef(null);
   const [status, setStatus] = useState({});
   const [loading, setLoading] = useState(true);
+  const [orientationIsLandscape, setOrientationIsLandscape] = useState(false);
   const { courseName, data } = route.params;
 
   let videoAssets;
@@ -161,6 +133,14 @@ export const CourseDetailScreen = ({ route, navigation }) => {
         <Container>
           <SkeletonVideo load={loading}>
             <Video
+              onFullscreenUpdate={async () => {
+                await ScreenOrientation.lockAsync(
+                  orientationIsLandscape
+                    ? ScreenOrientation.OrientationLock.PORTRAIT
+                    : ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
+                );
+                setOrientationIsLandscape(!orientationIsLandscape);
+              }}
               source={videoAssets}
               ref={video}
               style={styles.video}
